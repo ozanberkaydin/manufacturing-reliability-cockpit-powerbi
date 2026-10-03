@@ -1,0 +1,4 @@
+/// Processed CSV folder. Change this parameter if the project is moved; Python paths remain relative to the project.
+expression 'Data Folder' = "C:/Users/PC/Projects/PowerBI/Manufacturing_Reliability_Cockpit/data/processed" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 54ae3ddd-2716-46f2-880f-a37e25616171
+

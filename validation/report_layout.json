@@ -1,0 +1,1332 @@
+{
+  "plant_overview": [
+    {
+      "id": "8a99f028c02b4c01b851",
+      "kind": "textbox",
+      "title": null,
+      "rect": [
+        32,
+        24,
+        1000,
+        32
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "06c617752ac94cdabb56",
+      "kind": "textbox",
+      "title": null,
+      "rect": [
+        32,
+        64,
+        928,
+        64
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "ebc1a9bcc9ae4084abb4",
+      "kind": "textbox",
+      "title": null,
+      "rect": [
+        32,
+        136,
+        928,
+        32
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "93ecf76d37f84b5aa0f7",
+      "kind": "slicer",
+      "title": null,
+      "rect": [
+        984,
+        56,
+        232,
+        104
+      ],
+      "bindings": {
+        "Values": [
+          [
+            "Machines",
+            "Model"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "d59aad45e34e414d9f81",
+      "kind": "slicer",
+      "title": null,
+      "rect": [
+        1232,
+        56,
+        232,
+        104
+      ],
+      "bindings": {
+        "Values": [
+          [
+            "Machines",
+            "Machine"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "7aa56f15eeea43fe8149",
+      "kind": "slicer",
+      "title": null,
+      "rect": [
+        1480,
+        40,
+        408,
+        128
+      ],
+      "bindings": {
+        "Values": [
+          [
+            "Dates",
+            "Date"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "04f5f4b33dae42d5a7a2",
+      "kind": "actionButton",
+      "title": null,
+      "rect": [
+        32,
+        192,
+        232,
+        48
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "62fda0c279624f68bda3",
+      "kind": "actionButton",
+      "title": null,
+      "rect": [
+        280,
+        192,
+        232,
+        48
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "96f7e5af0fe34a31b711",
+      "kind": "actionButton",
+      "title": null,
+      "rect": [
+        528,
+        192,
+        232,
+        48
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "6bbbedf2570b44d5bc26",
+      "kind": "actionButton",
+      "title": null,
+      "rect": [
+        776,
+        192,
+        232,
+        48
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "4026f2edb6d84d4b80ca",
+      "kind": "textbox",
+      "title": null,
+      "rect": [
+        1392,
+        200,
+        496,
+        40
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "da5636d75ea54b34a5c2",
+      "kind": "textbox",
+      "title": null,
+      "rect": [
+        32,
+        1032,
+        1856,
+        32
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "450e14e6994548cfa19a",
+      "kind": "cardVisual",
+      "title": null,
+      "rect": [
+        32,
+        272,
+        448,
+        112
+      ],
+      "bindings": {
+        "Data": [
+          "Failure Events"
+        ]
+      }
+    },
+    {
+      "id": "fb5eb94951234b2ca2e6",
+      "kind": "cardVisual",
+      "title": null,
+      "rect": [
+        504,
+        272,
+        448,
+        112
+      ],
+      "bindings": {
+        "Data": [
+          "Machines With Failures"
+        ]
+      }
+    },
+    {
+      "id": "75f287abf16e4b69baa8",
+      "kind": "cardVisual",
+      "title": null,
+      "rect": [
+        976,
+        272,
+        448,
+        112
+      ],
+      "bindings": {
+        "Data": [
+          "Observed Telemetry Hours"
+        ]
+      }
+    },
+    {
+      "id": "dd781a53991c4f639f1d",
+      "kind": "cardVisual",
+      "title": null,
+      "rect": [
+        1448,
+        272,
+        440,
+        112
+      ],
+      "bindings": {
+        "Data": [
+          "Failures per 1000 Observed Hours"
+        ]
+      }
+    },
+    {
+      "id": "2b4322926e3644199b2a",
+      "kind": "lineChart",
+      "title": "Component failure events by month",
+      "rect": [
+        32,
+        408,
+        1128,
+        320
+      ],
+      "bindings": {
+        "Category": [
+          [
+            "Dates",
+            "Month"
+          ]
+        ],
+        "Y": [
+          "Failure Events"
+        ],
+        "Tooltips": [
+          "Machines With Failures",
+          "Observed Telemetry Hours"
+        ]
+      }
+    },
+    {
+      "id": "460939853da24a82a21c",
+      "kind": "clusteredBarChart",
+      "title": "Machines with most failure events | top 10 ranks",
+      "rect": [
+        1184,
+        408,
+        704,
+        320
+      ],
+      "bindings": {
+        "Category": [
+          [
+            "Machines",
+            "Machine"
+          ]
+        ],
+        "Y": [
+          "Top Machine Failure Events"
+        ]
+      }
+    },
+    {
+      "id": "1e8c7d6c02ad48699a21",
+      "kind": "clusteredBarChart",
+      "title": "Failure concentration by component",
+      "rect": [
+        32,
+        752,
+        600,
+        248
+      ],
+      "bindings": {
+        "Category": [
+          [
+            "Components",
+            "Component"
+          ]
+        ],
+        "Y": [
+          "Failure Events"
+        ],
+        "Tooltips": [
+          "Component Cumulative Share"
+        ]
+      }
+    },
+    {
+      "id": "fc7ed72e49c440b8a8c6",
+      "kind": "tableEx",
+      "title": "Pareto | descending events",
+      "rect": [
+        656,
+        752,
+        552,
+        248
+      ],
+      "bindings": {
+        "Values": [
+          [
+            "Components",
+            "Component"
+          ],
+          "Failure Events",
+          "Component Cumulative Share"
+        ]
+      }
+    },
+    {
+      "id": "aa0e19e04e93410aa8ad",
+      "kind": "cardVisual",
+      "title": null,
+      "rect": [
+        1232,
+        752,
+        656,
+        128
+      ],
+      "bindings": {
+        "Data": [
+          "Plant Insight"
+        ]
+      }
+    },
+    {
+      "id": "d45366a1b5444a2db4df",
+      "kind": "textbox",
+      "title": null,
+      "rect": [
+        1248,
+        904,
+        624,
+        96
+      ],
+      "bindings": {}
+    }
+  ],
+  "machine_health": [
+    {
+      "id": "800813c5a9ff4b92b326",
+      "kind": "textbox",
+      "title": null,
+      "rect": [
+        32,
+        24,
+        1000,
+        32
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "b7230505295741c6b90d",
+      "kind": "textbox",
+      "title": null,
+      "rect": [
+        32,
+        64,
+        928,
+        64
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "f4db55c871de41f586b7",
+      "kind": "textbox",
+      "title": null,
+      "rect": [
+        32,
+        136,
+        928,
+        32
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "6fd0f3cb7f2148669e06",
+      "kind": "slicer",
+      "title": null,
+      "rect": [
+        984,
+        56,
+        232,
+        104
+      ],
+      "bindings": {
+        "Values": [
+          [
+            "Machines",
+            "Model"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "74cc08ace8aa4e7ea8cc",
+      "kind": "slicer",
+      "title": null,
+      "rect": [
+        1232,
+        56,
+        232,
+        104
+      ],
+      "bindings": {
+        "Values": [
+          [
+            "Machines",
+            "Machine"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "fe9c38fe286c4590a5e3",
+      "kind": "slicer",
+      "title": null,
+      "rect": [
+        1480,
+        40,
+        408,
+        128
+      ],
+      "bindings": {
+        "Values": [
+          [
+            "Dates",
+            "Date"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "fa909e94c39447f5b358",
+      "kind": "actionButton",
+      "title": null,
+      "rect": [
+        32,
+        192,
+        232,
+        48
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "5cb6caeb118542dfb5ce",
+      "kind": "actionButton",
+      "title": null,
+      "rect": [
+        280,
+        192,
+        232,
+        48
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "67f5ed30b1634e6b8783",
+      "kind": "actionButton",
+      "title": null,
+      "rect": [
+        528,
+        192,
+        232,
+        48
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "da17ac28393c4a0d9232",
+      "kind": "actionButton",
+      "title": null,
+      "rect": [
+        776,
+        192,
+        232,
+        48
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "023e9a5cfb80415b8c6c",
+      "kind": "textbox",
+      "title": null,
+      "rect": [
+        1392,
+        200,
+        496,
+        40
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "2f6800d95c2944179f3c",
+      "kind": "textbox",
+      "title": null,
+      "rect": [
+        32,
+        1032,
+        1856,
+        32
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "a226c45abb624d7783eb",
+      "kind": "cardVisual",
+      "title": null,
+      "rect": [
+        32,
+        272,
+        1152,
+        96
+      ],
+      "bindings": {
+        "Data": [
+          "Machine Context"
+        ]
+      }
+    },
+    {
+      "id": "93f8add2459a4e2a9799",
+      "kind": "slicer",
+      "title": null,
+      "rect": [
+        1208,
+        272,
+        256,
+        96
+      ],
+      "bindings": {
+        "Values": [
+          [
+            "Sensors",
+            "Sensor"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "57364e9f9b1847c98f35",
+      "kind": "actionButton",
+      "title": null,
+      "rect": [
+        1488,
+        296,
+        216,
+        48
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "74fdc5e30bb94738a854",
+      "kind": "cardVisual",
+      "title": null,
+      "rect": [
+        32,
+        392,
+        592,
+        112
+      ],
+      "bindings": {
+        "Data": [
+          "Latest Observed Timestamp"
+        ]
+      }
+    },
+    {
+      "id": "b5c91f21debb4a0d9cfc",
+      "kind": "cardVisual",
+      "title": null,
+      "rect": [
+        648,
+        392,
+        592,
+        112
+      ],
+      "bindings": {
+        "Data": [
+          "Failure Events",
+          "Replacement Records"
+        ]
+      }
+    },
+    {
+      "id": "f5d90938d5494a53be93",
+      "kind": "cardVisual",
+      "title": null,
+      "rect": [
+        1264,
+        392,
+        624,
+        112
+      ],
+      "bindings": {
+        "Data": [
+          "Priority Status"
+        ]
+      }
+    },
+    {
+      "id": "b45fb58218924bb183aa",
+      "kind": "lineChart",
+      "title": "Daily sensor trend vs preceding 30-day reference",
+      "rect": [
+        32,
+        528,
+        1208,
+        256
+      ],
+      "bindings": {
+        "Category": [
+          [
+            "Dates",
+            "Date"
+          ]
+        ],
+        "Y": [
+          "Sensor Daily Mean",
+          "Prior 30 Day Mean"
+        ],
+        "Tooltips": [
+          "Sensor Deviation Z"
+        ]
+      }
+    },
+    {
+      "id": "91527beb75624063b241",
+      "kind": "lineChart",
+      "title": "Event records on the same daily time axis",
+      "rect": [
+        32,
+        808,
+        1208,
+        192
+      ],
+      "bindings": {
+        "Category": [
+          [
+            "Dates",
+            "Date"
+          ]
+        ],
+        "Y": [
+          "Error Events",
+          "Replacement Records",
+          "Failure Events"
+        ]
+      }
+    },
+    {
+      "id": "0cf57a76670643408f57",
+      "kind": "cardVisual",
+      "title": null,
+      "rect": [
+        1264,
+        528,
+        624,
+        128
+      ],
+      "bindings": {
+        "Data": [
+          "Machine History Note"
+        ]
+      }
+    },
+    {
+      "id": "37a3a6881a804efb8a1b",
+      "kind": "cardVisual",
+      "title": null,
+      "rect": [
+        1264,
+        680,
+        624,
+        88
+      ],
+      "bindings": {
+        "Data": [
+          "Sensor Context"
+        ]
+      }
+    },
+    {
+      "id": "0a5729278bae4f93b4b5",
+      "kind": "textbox",
+      "title": null,
+      "rect": [
+        1280,
+        776,
+        592,
+        224
+      ],
+      "bindings": {}
+    }
+  ],
+  "failure_analysis": [
+    {
+      "id": "8b0a47a1395d4fa2a614",
+      "kind": "textbox",
+      "title": null,
+      "rect": [
+        32,
+        24,
+        1000,
+        32
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "eedc91a9458249429176",
+      "kind": "textbox",
+      "title": null,
+      "rect": [
+        32,
+        64,
+        928,
+        64
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "0d10c49448ba4d5cacc3",
+      "kind": "textbox",
+      "title": null,
+      "rect": [
+        32,
+        136,
+        928,
+        32
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "1de82493b3764dc6b67e",
+      "kind": "slicer",
+      "title": null,
+      "rect": [
+        984,
+        56,
+        232,
+        104
+      ],
+      "bindings": {
+        "Values": [
+          [
+            "Machines",
+            "Model"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "354e996c50e440b2a731",
+      "kind": "slicer",
+      "title": null,
+      "rect": [
+        1232,
+        56,
+        232,
+        104
+      ],
+      "bindings": {
+        "Values": [
+          [
+            "Machines",
+            "Machine"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "de94adf5856e4d9ea7a9",
+      "kind": "slicer",
+      "title": null,
+      "rect": [
+        1480,
+        40,
+        408,
+        128
+      ],
+      "bindings": {
+        "Values": [
+          [
+            "Dates",
+            "Date"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "0b1eacf2bc2d414a9ef5",
+      "kind": "actionButton",
+      "title": null,
+      "rect": [
+        32,
+        192,
+        232,
+        48
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "e9b8cb65b7a64cabb0fb",
+      "kind": "actionButton",
+      "title": null,
+      "rect": [
+        280,
+        192,
+        232,
+        48
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "b31d4d15e2e04938ae43",
+      "kind": "actionButton",
+      "title": null,
+      "rect": [
+        528,
+        192,
+        232,
+        48
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "6f86778b994547c3b3fc",
+      "kind": "actionButton",
+      "title": null,
+      "rect": [
+        776,
+        192,
+        232,
+        48
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "d234f0287bf747e9bd38",
+      "kind": "textbox",
+      "title": null,
+      "rect": [
+        1392,
+        200,
+        496,
+        40
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "bfa41831b89c443bb9c8",
+      "kind": "textbox",
+      "title": null,
+      "rect": [
+        32,
+        1032,
+        1856,
+        32
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "b508da800c194fc2b9c3",
+      "kind": "slicer",
+      "title": null,
+      "rect": [
+        32,
+        272,
+        256,
+        96
+      ],
+      "bindings": {
+        "Values": [
+          [
+            "Components",
+            "Component"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "9ccaa8dad6dc4c07a18a",
+      "kind": "slicer",
+      "title": null,
+      "rect": [
+        312,
+        272,
+        256,
+        96
+      ],
+      "bindings": {
+        "Values": [
+          [
+            "Sensors",
+            "Sensor"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "3e9b56a9112d463fb5b3",
+      "kind": "cardVisual",
+      "title": null,
+      "rect": [
+        592,
+        272,
+        736,
+        112
+      ],
+      "bindings": {
+        "Data": [
+          "Failure Events",
+          "Window Event Sample"
+        ]
+      }
+    },
+    {
+      "id": "f52a10c3534441fd880f",
+      "kind": "cardVisual",
+      "title": null,
+      "rect": [
+        1352,
+        272,
+        536,
+        112
+      ],
+      "bindings": {
+        "Data": [
+          "Failures per 1000 Observed Hours"
+        ]
+      }
+    },
+    {
+      "id": "c12cad9a51704bcf8bdf",
+      "kind": "clusteredBarChart",
+      "title": "Failure records per 1,000 observed hours | by model",
+      "rect": [
+        32,
+        408,
+        904,
+        256
+      ],
+      "bindings": {
+        "Category": [
+          [
+            "Machines",
+            "Model"
+          ]
+        ],
+        "Y": [
+          "Failures per 1000 Observed Hours"
+        ],
+        "Tooltips": [
+          "Failure Events",
+          "Observed Machines",
+          "Observed Telemetry Hours"
+        ]
+      }
+    },
+    {
+      "id": "815b7cf63d2c4e91b088",
+      "kind": "clusteredBarChart",
+      "title": "Failure records per 1,000 observed hours | recorded age",
+      "rect": [
+        960,
+        408,
+        928,
+        256
+      ],
+      "bindings": {
+        "Category": [
+          [
+            "Machines",
+            "Age Band"
+          ]
+        ],
+        "Y": [
+          "Failures per 1000 Observed Hours"
+        ],
+        "Tooltips": [
+          "Failure Events",
+          "Observed Machines",
+          "Observed Telemetry Hours"
+        ]
+      }
+    },
+    {
+      "id": "65492ed72c494f23aa26",
+      "kind": "lineChart",
+      "title": "Sensor behavior around component failure | day 0 = failure",
+      "rect": [
+        32,
+        688,
+        904,
+        312
+      ],
+      "bindings": {
+        "Category": [
+          [
+            "Failure Windows",
+            "Relative Day"
+          ]
+        ],
+        "Y": [
+          "Failure Window Mean"
+        ],
+        "Tooltips": [
+          "Window Event Sample",
+          "Window Hour Sample"
+        ]
+      }
+    },
+    {
+      "id": "f017765482524672ad08",
+      "kind": "tableEx",
+      "title": "Counts alongside normalized component comparisons",
+      "rect": [
+        960,
+        688,
+        928,
+        248
+      ],
+      "bindings": {
+        "Values": [
+          [
+            "Components",
+            "Component"
+          ],
+          "Failure Events",
+          "Machines With Failures",
+          "Failures per 1000 Observed Hours"
+        ]
+      }
+    },
+    {
+      "id": "8e986baeb8c2467482f5",
+      "kind": "textbox",
+      "title": null,
+      "rect": [
+        976,
+        960,
+        896,
+        56
+      ],
+      "bindings": {}
+    }
+  ],
+  "maintenance_priorities": [
+    {
+      "id": "1682a15b138b47e5bd5d",
+      "kind": "textbox",
+      "title": null,
+      "rect": [
+        32,
+        24,
+        1000,
+        32
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "d3017610c9b84fb3856d",
+      "kind": "textbox",
+      "title": null,
+      "rect": [
+        32,
+        64,
+        928,
+        64
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "d2bee7e97bca416a9c74",
+      "kind": "textbox",
+      "title": null,
+      "rect": [
+        32,
+        136,
+        928,
+        32
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "ac194e292c334668b4d9",
+      "kind": "slicer",
+      "title": null,
+      "rect": [
+        984,
+        56,
+        232,
+        104
+      ],
+      "bindings": {
+        "Values": [
+          [
+            "Machines",
+            "Model"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "b189c255c2394a1d8157",
+      "kind": "slicer",
+      "title": null,
+      "rect": [
+        1232,
+        56,
+        232,
+        104
+      ],
+      "bindings": {
+        "Values": [
+          [
+            "Machines",
+            "Machine"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "2fc41c70bac74f34a202",
+      "kind": "slicer",
+      "title": null,
+      "rect": [
+        1480,
+        40,
+        408,
+        128
+      ],
+      "bindings": {
+        "Values": [
+          [
+            "Dates",
+            "Date"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "6a8baf97a29a468bb15a",
+      "kind": "actionButton",
+      "title": null,
+      "rect": [
+        32,
+        192,
+        232,
+        48
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "b4945011e07645969d1d",
+      "kind": "actionButton",
+      "title": null,
+      "rect": [
+        280,
+        192,
+        232,
+        48
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "6c3556cbbfc34c19b346",
+      "kind": "actionButton",
+      "title": null,
+      "rect": [
+        528,
+        192,
+        232,
+        48
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "6912dcd7bd3e4acd97df",
+      "kind": "actionButton",
+      "title": null,
+      "rect": [
+        776,
+        192,
+        232,
+        48
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "6f53365b52af45ae9a15",
+      "kind": "textbox",
+      "title": null,
+      "rect": [
+        1392,
+        200,
+        496,
+        40
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "6d02214badbe48908f65",
+      "kind": "textbox",
+      "title": null,
+      "rect": [
+        32,
+        1032,
+        1856,
+        32
+      ],
+      "bindings": {}
+    },
+    {
+      "id": "32b8b8352baf4af7b763",
+      "kind": "cardVisual",
+      "title": null,
+      "rect": [
+        32,
+        272,
+        1136,
+        96
+      ],
+      "bindings": {
+        "Data": [
+          "Priority Date Label"
+        ]
+      }
+    },
+    {
+      "id": "bdc95834f290415d8ca5",
+      "kind": "cardVisual",
+      "title": null,
+      "rect": [
+        1192,
+        272,
+        696,
+        112
+      ],
+      "bindings": {
+        "Data": [
+          "High Priority Machines",
+          "Watch Priority Machines"
+        ]
+      }
+    },
+    {
+      "id": "b10a04e90cd644ff9027",
+      "kind": "tableEx",
+      "title": "Maintenance inspection queue | select a machine row to drill through",
+      "rect": [
+        32,
+        408,
+        1856,
+        312
+      ],
+      "bindings": {
+        "Values": [
+          [
+            "Machines",
+            "Machine"
+          ],
+          [
+            "Machines",
+            "Model"
+          ],
+          "Priority Rank",
+          "Priority Score",
+          "Priority Status",
+          "Recent Failures 14 Days",
+          "Recent Errors 7 Days",
+          "Maximum Sensor Deviation",
+          "Oldest Component Replacement Days"
+        ]
+      }
+    },
+    {
+      "id": "63e311e690d84f9b8e26",
+      "kind": "tableEx",
+      "title": "Why each machine is prioritized | transparent score contribution",
+      "rect": [
+        32,
+        744,
+        1856,
+        200
+      ],
+      "bindings": {
+        "Values": [
+          [
+            "Machines",
+            "Machine"
+          ],
+          "Priority Score",
+          "Failure Score Points",
+          "Error Score Points",
+          "Sensor Score Points",
+          "Maintenance Score Points",
+          "Priority Reasons",
+          "Suggested Inspection"
+        ]
+      }
+    },
+    {
+      "id": "0ba02d9835b547be97be",
+      "kind": "textbox",
+      "title": null,
+      "rect": [
+        32,
+        968,
+        1856,
+        48
+      ],
+      "bindings": {}
+    }
+  ]
+}

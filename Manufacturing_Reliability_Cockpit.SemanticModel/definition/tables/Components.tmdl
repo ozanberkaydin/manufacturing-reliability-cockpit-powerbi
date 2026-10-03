@@ -1,0 +1,22 @@
+/// One row per coded component; physical identities are unspecified.
+table Components
+	lineageTag: c153ebdb-ffd5-41a9-91cc-d02c779b9e0f
+
+	/// Anonymised component code (comp1-comp4); physical identity is not given in the source.
+	column Component
+		dataType: string
+		isKey
+		lineageTag: 3c332c05-42ce-492b-935a-8fbdba98af8d
+		summarizeBy: none
+		sourceColumn: Component
+
+	partition Components = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(#"Data Folder" & "/components.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"Component", type text}}, "en-US")
+				in
+				    Typed
+

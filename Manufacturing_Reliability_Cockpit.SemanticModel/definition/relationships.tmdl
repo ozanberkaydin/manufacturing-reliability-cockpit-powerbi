@@ -1,0 +1,76 @@
+relationship 'Failures to Machines'
+	fromColumn: Failures.'Machine ID'
+	toColumn: Machines.'Machine ID'
+
+relationship 'Failures to Dates'
+	fromColumn: Failures.Date
+	toColumn: Dates.Date
+
+relationship 'Failures to Components'
+	fromColumn: Failures.Component
+	toColumn: Components.Component
+
+relationship 'Errors to Machines'
+	fromColumn: Errors.'Machine ID'
+	toColumn: Machines.'Machine ID'
+
+relationship 'Errors to Dates'
+	fromColumn: Errors.Date
+	toColumn: Dates.Date
+
+relationship 'Maintenance to Machines'
+	fromColumn: Maintenance.'Machine ID'
+	toColumn: Machines.'Machine ID'
+
+relationship 'Maintenance to Dates'
+	fromColumn: Maintenance.Date
+	toColumn: Dates.Date
+
+relationship 'Maintenance to Components'
+	fromColumn: Maintenance.Component
+	toColumn: Components.Component
+
+relationship 'Daily Health to Machines'
+	fromColumn: 'Daily Health'.'Machine ID'
+	toColumn: Machines.'Machine ID'
+
+relationship 'Daily Health to Dates'
+	fromColumn: 'Daily Health'.Date
+	toColumn: Dates.Date
+
+relationship 'Sensor Daily to Machines'
+	fromColumn: 'Sensor Daily'.'Machine ID'
+	toColumn: Machines.'Machine ID'
+
+relationship 'Sensor Daily to Dates'
+	fromColumn: 'Sensor Daily'.Date
+	toColumn: Dates.Date
+
+relationship 'Sensor Daily to Sensors'
+	fromColumn: 'Sensor Daily'.Sensor
+	toColumn: Sensors.Sensor
+
+relationship 'Failure Windows to Machines'
+	fromColumn: 'Failure Windows'.'Machine ID'
+	toColumn: Machines.'Machine ID'
+
+relationship 'Failure Windows to Dates'
+	fromColumn: 'Failure Windows'.Date
+	toColumn: Dates.Date
+
+relationship 'Failure Windows to Components'
+	fromColumn: 'Failure Windows'.Component
+	toColumn: Components.Component
+
+relationship 'Failure Windows to Sensors'
+	fromColumn: 'Failure Windows'.Sensor
+	toColumn: Sensors.Sensor
+
+relationship 'Failure Intervals to Machines'
+	fromColumn: 'Failure Intervals'.'Machine ID'
+	toColumn: Machines.'Machine ID'
+
+relationship 'Failure Intervals to Dates'
+	fromColumn: 'Failure Intervals'.Date
+	toColumn: Dates.Date
+

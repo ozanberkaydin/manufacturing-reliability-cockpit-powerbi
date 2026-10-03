@@ -1,0 +1,115 @@
+/// One row per machine, date, sensor. Prior reference uses preceding 30 days with minimum 7 days.
+table 'Sensor Daily'
+	lineageTag: 9e523b65-c5e3-46ed-b129-650826cf169c
+
+	/// Daily sensor average; returns blank unless exactly one sensor is in context; all machines gives a fleet average. Reference excludes current day and requires 7 previous daily means.
+	measure 'Sensor Daily Mean' = IF(HASONEVALUE('Sensor Daily'[Sensor]), AVERAGE('Sensor Daily'[Mean Reading]))
+		formatString: 0.00
+		displayFolder: Sensors
+		lineageTag: 4a9d88ec-c0b7-4c0b-ab2d-76c462ba6741
+
+	/// Daily sensor average; returns blank unless exactly one sensor is in context; all machines gives a fleet average. Reference excludes current day and requires 7 previous daily means.
+	measure 'Prior 30 Day Mean' = IF(HASONEVALUE('Sensor Daily'[Sensor]), AVERAGE('Sensor Daily'[Prior Mean]))
+		formatString: 0.00
+		displayFolder: Sensors
+		lineageTag: c7cc394a-ce89-4b98-9b1c-dc6e716345da
+
+	/// Daily sensor average; returns blank unless exactly one sensor is in context; all machines gives a fleet average. Reference excludes current day and requires 7 previous daily means.
+	measure 'Sensor Deviation Z' = IF(HASONEVALUE('Sensor Daily'[Sensor]), AVERAGE('Sensor Daily'[Deviation Z]))
+		formatString: 0.00
+		displayFolder: Sensors
+		lineageTag: 78fd8206-197c-4980-9210-abd886ce8650
+
+	/// Sensor identity and unit limitation.
+	measure 'Sensor Context' = SELECTEDVALUE('Sensors'[Sensor], "Select one sensor") & " | source sample units (physical units unspecified)"
+		formatString: General
+		displayFolder: Context
+		lineageTag: e703fef5-bea3-4332-8871-c2d20e36a9d7
+
+	/// One row per machine, date, sensor. Prior reference uses preceding 30 days with minimum 7 days.
+	column 'Machine ID'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d1db65a5-3b2b-4782-8f0e-dc9d434837a6
+		summarizeBy: none
+		sourceColumn: Machine ID
+
+	/// One row per machine, date, sensor. Prior reference uses preceding 30 days with minimum 7 days.
+	column Date
+		dataType: dateTime
+		formatString: yyyy-MM-dd
+		lineageTag: 15d26b4d-3686-4e09-846f-dfda7a2a1545
+		summarizeBy: none
+		sourceColumn: Date
+
+	/// Telemetry channel.
+	column Sensor
+		dataType: string
+		lineageTag: 6c8d3f89-9797-41b8-9b8f-daebebde72f6
+		summarizeBy: none
+		sourceColumn: Sensor
+
+	/// Mean Reading. Source sample units, unspecified.
+	column 'Mean Reading'
+		dataType: decimal
+		isHidden
+		formatString: 0.00
+		lineageTag: 845c2ebe-5199-41b8-9644-7a77076243d1
+		summarizeBy: none
+		sourceColumn: Mean Reading
+
+	/// Prior Mean. Source sample units, unspecified.
+	column 'Prior Mean'
+		dataType: decimal
+		isHidden
+		formatString: 0.00
+		lineageTag: 632ebff6-5360-498f-83fc-1928a9269320
+		summarizeBy: none
+		sourceColumn: Prior Mean
+
+	/// Prior Std. Source sample units, unspecified.
+	column 'Prior Std'
+		dataType: decimal
+		isHidden
+		formatString: 0.00
+		lineageTag: cd04bc42-1da2-4958-abc4-87a175bc19e0
+		summarizeBy: none
+		sourceColumn: Prior Std
+
+	/// (Mean Reading - Prior Mean) / Prior Std for the same machine and sensor.
+	column 'Deviation Z'
+		dataType: decimal
+		isHidden
+		formatString: 0.00
+		lineageTag: 00a021cf-3b55-4772-8924-6f8c95fc1501
+		summarizeBy: none
+		sourceColumn: Deviation Z
+
+	/// Hourly readings behind the daily mean.
+	column 'Reading Count'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7ad3f21f-49d1-49ae-a170-70ea7e365f09
+		summarizeBy: none
+		sourceColumn: Reading Count
+
+	/// Unit label carried from the source; physical units are unspecified.
+	column Unit
+		dataType: string
+		isHidden
+		lineageTag: 8355035f-9b0f-4887-b628-c201daaf4e10
+		summarizeBy: none
+		sourceColumn: Unit
+
+	partition 'Sensor Daily' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(#"Data Folder" & "/sensor_daily.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"Machine ID", Int64.Type}, {"Date", type datetime}, {"Sensor", type text}, {"Mean Reading", type number}, {"Prior Mean", type number}, {"Prior Std", type number}, {"Deviation Z", type number}, {"Reading Count", Int64.Type}, {"Unit", type text}}, "en-US")
+				in
+				    Typed
+

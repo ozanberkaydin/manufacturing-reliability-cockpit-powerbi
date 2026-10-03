@@ -1,0 +1,52 @@
+/// One row per timestamp, machine, component replacement; includes failure-related replacements.
+table Maintenance
+	lineageTag: 43034e33-725e-4577-8909-35c11d9ebccb
+
+	/// Component replacement records including replacements related to failure. Do not add this to failures as unique incidents.
+	measure 'Replacement Records' = COALESCE(COUNTROWS('Maintenance'), 0)
+		formatString: #,##0
+		displayFolder: Reliability
+		lineageTag: 6bc5b161-dcd2-49c8-b378-a48731e5f5a5
+
+	/// Timestamp of the component replacement record.
+	column Timestamp
+		dataType: dateTime
+		isHidden
+		lineageTag: 054bcfd4-f8f3-405a-b441-51d7be335eae
+		summarizeBy: none
+		sourceColumn: Timestamp
+
+	/// One row per timestamp, machine, component replacement; includes failure-related replacements.
+	column 'Machine ID'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0c3fec22-b5a2-4446-97b9-88cefea61f5c
+		summarizeBy: none
+		sourceColumn: Machine ID
+
+	/// Replaced component code.
+	column Component
+		dataType: string
+		lineageTag: 80eac956-52cc-4505-86f2-e7b23d632096
+		summarizeBy: none
+		sourceColumn: Component
+
+	/// One row per timestamp, machine, component replacement; includes failure-related replacements.
+	column Date
+		dataType: dateTime
+		formatString: yyyy-MM-dd
+		lineageTag: ecc960c7-8654-4ff8-b2ae-65344e456cab
+		summarizeBy: none
+		sourceColumn: Date
+
+	partition Maintenance = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(#"Data Folder" & "/maintenance.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"Timestamp", type datetime}, {"Machine ID", Int64.Type}, {"Component", type text}, {"Date", type datetime}}, "en-US")
+				in
+				    Typed
+

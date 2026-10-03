@@ -1,0 +1,460 @@
+/// One row per machine, date with end-of-day score and daily telemetry summary. Only past/current records contribute.
+table 'Daily Health'
+	lineageTag: 3d138741-608e-462c-af7e-0f32a9cfa083
+
+	/// One timestamped hourly sample is one observed telemetry hour; not proof of productive uptime.
+	measure 'Observed Telemetry Hours' = SUM('Daily Health'[Reading Count])
+		formatString: #,##0
+		displayFolder: Reliability
+		lineageTag: 32c7c853-11a5-4dbe-bfb9-cbe8df910488
+
+	/// Distinct machines with telemetry in selected period.
+	measure 'Observed Machines' = DISTINCTCOUNT('Daily Health'[Machine ID])
+		formatString: #,##0
+		displayFolder: Reliability
+		lineageTag: 9d4e0a45-b345-4c9d-89e4-f06d85f0fb44
+
+	/// Latest available daily snapshot no later than maximum selected date; historical end-of-day convention.
+	measure 'As Of Date' =
+			VAR _selected = MAX('Dates'[Date])
+			VAR _last = CALCULATE(MAX('Daily Health'[Date]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] <= _selected)
+			RETURN _last
+		formatString: yyyy-MM-dd
+		displayFolder: Priority
+		lineageTag: e35a8dfe-3910-481e-98bf-661396cf934a
+
+	/// Latest selected as-of snapshot. For scores and reasons select an individual machine or use the ranking table.
+	measure 'Priority Score' =
+			VAR _asOf = [As Of Date]
+			RETURN IF(NOT ISBLANK(_asOf), CALCULATE(MAX('Daily Health'[Recorded Priority Score]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf))
+		formatString: 0.0
+		displayFolder: Priority
+		lineageTag: 42859efd-b6ae-4926-8144-941f41dbffa6
+
+	/// Latest selected as-of snapshot. For scores and reasons select an individual machine or use the ranking table.
+	measure 'Recent Failures 14 Days' =
+			VAR _asOf = [As Of Date]
+			RETURN IF(NOT ISBLANK(_asOf), CALCULATE(MAX('Daily Health'[Failures 14 Days]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf))
+		formatString: 0
+		displayFolder: Priority
+		lineageTag: 07f3dddb-56f2-4fe8-b45f-ebe4f878e745
+
+	/// Latest selected as-of snapshot. For scores and reasons select an individual machine or use the ranking table.
+	measure 'Recent Errors 7 Days' =
+			VAR _asOf = [As Of Date]
+			RETURN IF(NOT ISBLANK(_asOf), CALCULATE(MAX('Daily Health'[Errors 7 Days]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf))
+		formatString: 0
+		displayFolder: Priority
+		lineageTag: b63e8b4f-c527-4be8-9923-7884d49d3063
+
+	/// Latest selected as-of snapshot. For scores and reasons select an individual machine or use the ranking table.
+	measure 'Maximum Sensor Deviation' =
+			VAR _asOf = [As Of Date]
+			RETURN IF(NOT ISBLANK(_asOf), CALCULATE(MAX('Daily Health'[Sensor Deviation Max]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf))
+		formatString: 0.00
+		displayFolder: Priority
+		lineageTag: 03e54684-3e72-4ea3-afb4-05f9c08a053f
+
+	/// Latest selected as-of snapshot. For scores and reasons select an individual machine or use the ranking table.
+	measure 'Oldest Component Replacement Days' =
+			VAR _asOf = [As Of Date]
+			RETURN IF(NOT ISBLANK(_asOf), CALCULATE(MAX('Daily Health'[Oldest Component Days]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf))
+		formatString: 0
+		displayFolder: Priority
+		lineageTag: 728ee20a-f827-4619-83ae-b9860ef8d0e8
+
+	/// Latest selected as-of snapshot. For scores and reasons select an individual machine or use the ranking table.
+	measure 'Failure Score Points' =
+			VAR _asOf = [As Of Date]
+			RETURN IF(NOT ISBLANK(_asOf), CALCULATE(MAX('Daily Health'[Failure Points]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf))
+		formatString: 0
+		displayFolder: Priority
+		lineageTag: a3093fcb-bc37-4d5e-846a-d4f691474c2b
+
+	/// Latest selected as-of snapshot. For scores and reasons select an individual machine or use the ranking table.
+	measure 'Error Score Points' =
+			VAR _asOf = [As Of Date]
+			RETURN IF(NOT ISBLANK(_asOf), CALCULATE(MAX('Daily Health'[Error Points]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf))
+		formatString: 0
+		displayFolder: Priority
+		lineageTag: b43808ee-8062-4622-ad43-99b60d7d7082
+
+	/// Latest selected as-of snapshot. For scores and reasons select an individual machine or use the ranking table.
+	measure 'Sensor Score Points' =
+			VAR _asOf = [As Of Date]
+			RETURN IF(NOT ISBLANK(_asOf), CALCULATE(MAX('Daily Health'[Sensor Points]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf))
+		formatString: 0.0
+		displayFolder: Priority
+		lineageTag: 6b67434b-c5fa-4342-b6dc-a947fb312f82
+
+	/// Latest selected as-of snapshot. For scores and reasons select an individual machine or use the ranking table.
+	measure 'Maintenance Score Points' =
+			VAR _asOf = [As Of Date]
+			RETURN IF(NOT ISBLANK(_asOf), CALCULATE(MAX('Daily Health'[Maintenance Points]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf))
+		formatString: 0
+		displayFolder: Priority
+		lineageTag: 7e7b51c3-1aaa-4e8b-a978-330c52aeccce
+
+	/// Latest selected as-of snapshot. For scores and reasons select an individual machine or use the ranking table.
+	measure 'Baseline Sensor Count' =
+			VAR _asOf = [As Of Date]
+			RETURN IF(NOT ISBLANK(_asOf), CALCULATE(MAX('Daily Health'[Baseline Sensors]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf))
+		formatString: 0
+		displayFolder: Priority
+		lineageTag: a0f54ab9-bbfa-4b52-b06f-fec42d11eddf
+
+	/// Latest selected as-of snapshot. For scores and reasons select an individual machine or use the ranking table.
+	measure 'Component History Count' =
+			VAR _asOf = [As Of Date]
+			RETURN IF(NOT ISBLANK(_asOf), CALCULATE(MAX('Daily Health'[Components With History]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf))
+		formatString: 0
+		displayFolder: Priority
+		lineageTag: f502794a-90ee-4919-8d85-32f976d668da
+
+	/// Rule-based prioritization, not probability; analytical recommendations requiring engineering review.
+	measure 'Priority Reasons' =
+			VAR _asOf = [As Of Date]
+			RETURN IF(HASONEVALUE('Machines'[Machine ID]), CALCULATE(SELECTEDVALUE('Daily Health'[Recorded Priority Reasons]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf), "Select one machine")
+		formatString: General
+		displayFolder: Priority
+		lineageTag: de68337c-004e-4b04-87a4-c4a4046c06e4
+
+	/// Rule-based prioritization, not probability; analytical recommendations requiring engineering review.
+	measure 'Suggested Inspection' =
+			VAR _asOf = [As Of Date]
+			RETURN IF(HASONEVALUE('Machines'[Machine ID]), CALCULATE(SELECTEDVALUE('Daily Health'[Recorded Suggested Inspection]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf), "Select one machine")
+		formatString: General
+		displayFolder: Priority
+		lineageTag: 819923a8-b945-4751-82fa-bdf8e9e9b6f1
+
+	/// Rule-based prioritization, not probability; analytical recommendations requiring engineering review.
+	measure 'Priority Status' =
+			VAR _asOf = [As Of Date]
+			RETURN IF(HASONEVALUE('Machines'[Machine ID]), CALCULATE(SELECTEDVALUE('Daily Health'[Priority Band]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf), "Select one machine")
+		formatString: General
+		displayFolder: Priority
+		lineageTag: 1f81e546-48da-4ba7-ade4-7b19fc645482
+
+	/// Dense rank within model/machine selection at the selected end date.
+	measure 'Priority Rank' = IF(HASONEVALUE('Machines'[Machine ID]), RANKX(ALLSELECTED('Machines'), [Priority Score], , DESC, Dense))
+		formatString: 0
+		displayFolder: Priority
+		lineageTag: 2209fba1-432a-41ef-9ce6-02a98529ad00
+
+	/// Count of machines at rule-based score >=60 as of selected date.
+	measure 'High Priority Machines' = SUMX(VALUES('Machines'[Machine ID]), IF([Priority Score] >= 60, 1, 0))
+		formatString: 0
+		displayFolder: Priority
+		lineageTag: bb3e41d5-bf4b-4e24-8c27-488e43fe63a5
+
+	/// Count at 30<=score<60 as of selected date.
+	measure 'Watch Priority Machines' = SUMX(VALUES('Machines'[Machine ID]), IF([Priority Score] >= 30 && [Priority Score] < 60, 1, 0))
+		formatString: 0
+		displayFolder: Priority
+		lineageTag: df50e03c-dbb4-4f6a-a50d-e1e84a5b7300
+
+	/// Latest telemetry actually observed at selected snapshot. No live feed.
+	measure 'Latest Observed Timestamp' =
+			VAR _asOf = [As Of Date]
+			RETURN CALCULATE(MAX('Daily Health'[Latest Timestamp]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf)
+		formatString: yyyy-MM-dd HH:mm
+		displayFolder: Context
+		lineageTag: 4545cebe-d2ed-4c5d-88ca-672eda80d15a
+
+	/// Historical cutoff and meaning of the priority score.
+	measure 'Priority Date Label' = "As of " & FORMAT([As Of Date], "dd MMM yyyy") & " | rule-based score, not ML probability"
+		formatString: General
+		displayFolder: Context
+		lineageTag: 1afc605a-4f6a-426e-92c7-f780a9e71020
+
+	/// One row per machine, date with end-of-day score and daily telemetry summary. Only past/current records contribute.
+	column 'Machine ID'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0020bcd6-581a-4cc3-94bb-2933f837e9cf
+		summarizeBy: none
+		sourceColumn: Machine ID
+
+	/// One row per machine, date with end-of-day score and daily telemetry summary. Only past/current records contribute.
+	column Date
+		dataType: dateTime
+		formatString: yyyy-MM-dd
+		lineageTag: 83b27a4b-ed4b-4609-8a51-853eb67fe245
+		summarizeBy: none
+		sourceColumn: Date
+
+	/// Daily mean voltage reading (source units).
+	column Voltage
+		dataType: decimal
+		isHidden
+		formatString: 0.00
+		lineageTag: 7c8df76a-1c74-49b9-bfd5-267d70902a1c
+		summarizeBy: none
+		sourceColumn: Voltage
+
+	/// Daily mean rotation reading (source units).
+	column Rotation
+		dataType: decimal
+		isHidden
+		formatString: 0.00
+		lineageTag: d7a5bea4-c2ba-4bb5-b3ae-4bdc3deedcc6
+		summarizeBy: none
+		sourceColumn: Rotation
+
+	/// Daily mean pressure reading (source units).
+	column Pressure
+		dataType: decimal
+		isHidden
+		formatString: 0.00
+		lineageTag: 75299f42-c954-463f-b543-4ed2437e7ccf
+		summarizeBy: none
+		sourceColumn: Pressure
+
+	/// Daily mean vibration reading (source units).
+	column Vibration
+		dataType: decimal
+		isHidden
+		formatString: 0.00
+		lineageTag: 5a897327-8f7a-48f9-a32e-318cf53a112a
+		summarizeBy: none
+		sourceColumn: Vibration
+
+	/// Hourly telemetry readings recorded for the machine on this date.
+	column 'Reading Count'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 96f01b0e-d33f-4c91-a685-3b8f3e690007
+		summarizeBy: none
+		sourceColumn: Reading Count
+
+	/// Last telemetry timestamp observed for the machine up to this date.
+	column 'Latest Timestamp'
+		dataType: dateTime
+		isHidden
+		lineageTag: 2c623de2-2972-484e-9633-527d229dc6db
+		summarizeBy: none
+		sourceColumn: Latest Timestamp
+
+	/// Voltage deviation from the machine's prior 30-day reference, in standard deviations.
+	column 'Voltage Z'
+		dataType: decimal
+		isHidden
+		formatString: 0.00
+		lineageTag: d978236b-e2af-4e6c-81f0-b4a88298c62f
+		summarizeBy: none
+		sourceColumn: Voltage Z
+
+	/// Rotation deviation from the machine's prior 30-day reference, in standard deviations.
+	column 'Rotation Z'
+		dataType: decimal
+		isHidden
+		formatString: 0.00
+		lineageTag: 069e37aa-1050-43e1-ab6c-05579fc70a07
+		summarizeBy: none
+		sourceColumn: Rotation Z
+
+	/// Pressure deviation from the machine's prior 30-day reference, in standard deviations.
+	column 'Pressure Z'
+		dataType: decimal
+		isHidden
+		formatString: 0.00
+		lineageTag: 16a1e49b-23f4-4f47-aa81-4d042dad0d50
+		summarizeBy: none
+		sourceColumn: Pressure Z
+
+	/// Vibration deviation from the machine's prior 30-day reference, in standard deviations.
+	column 'Vibration Z'
+		dataType: decimal
+		isHidden
+		formatString: 0.00
+		lineageTag: cf39422d-b297-4062-b5ee-5611da3192e8
+		summarizeBy: none
+		sourceColumn: Vibration Z
+
+	/// Component failure records in the 14 days ending on this date.
+	column 'Failures 14 Days'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 34397fd8-30a2-481f-afa0-f5e7276523ab
+		summarizeBy: none
+		sourceColumn: Failures 14 Days
+
+	/// Error records in the 7 days ending on this date.
+	column 'Errors 7 Days'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 774376a6-d84e-40bf-bda1-3691df89dd43
+		summarizeBy: none
+		sourceColumn: Errors 7 Days
+
+	/// Days since the last recorded comp1 replacement; blank if none recorded.
+	column 'comp1 Days Since Replacement'
+		dataType: decimal
+		isHidden
+		formatString: 0.00
+		lineageTag: 3d0dc17e-119e-4f48-a84f-bbe8f991394e
+		summarizeBy: none
+		sourceColumn: comp1 Days Since Replacement
+
+	/// Days since the last recorded comp2 replacement; blank if none recorded.
+	column 'comp2 Days Since Replacement'
+		dataType: decimal
+		isHidden
+		formatString: 0.00
+		lineageTag: 8757d846-ff9c-4a2e-8a4a-586b691f858f
+		summarizeBy: none
+		sourceColumn: comp2 Days Since Replacement
+
+	/// Days since the last recorded comp3 replacement; blank if none recorded.
+	column 'comp3 Days Since Replacement'
+		dataType: decimal
+		isHidden
+		formatString: 0.00
+		lineageTag: a13fa376-7929-4b42-9109-c6bbdabc54bc
+		summarizeBy: none
+		sourceColumn: comp3 Days Since Replacement
+
+	/// Days since the last recorded comp4 replacement; blank if none recorded.
+	column 'comp4 Days Since Replacement'
+		dataType: decimal
+		isHidden
+		formatString: 0.00
+		lineageTag: fc0d27cb-b396-430b-a342-ab938c0fa6cf
+		summarizeBy: none
+		sourceColumn: comp4 Days Since Replacement
+
+	/// Number of components with at least one recorded replacement.
+	column 'Components With History'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9f1ffeef-9057-4d53-884f-4e6fc7c1d793
+		summarizeBy: none
+		sourceColumn: Components With History
+
+	/// Largest days-since-replacement across components with history.
+	column 'Oldest Component Days'
+		dataType: decimal
+		isHidden
+		formatString: 0.00
+		lineageTag: 549b3b51-9610-4343-88d8-198831fcd83d
+		summarizeBy: none
+		sourceColumn: Oldest Component Days
+
+	/// Largest absolute sensor Z deviation on this date.
+	column 'Sensor Deviation Max'
+		dataType: decimal
+		isHidden
+		formatString: 0.00
+		lineageTag: 15a18fe8-1bd9-42fa-87d8-d868579d6052
+		summarizeBy: none
+		sourceColumn: Sensor Deviation Max
+
+	/// Sensors with enough prior history for a valid reference.
+	column 'Baseline Sensors'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 8cc7b537-c8ac-4843-9d28-79326cf6789f
+		summarizeBy: none
+		sourceColumn: Baseline Sensors
+
+	/// Score points from recent failures (max 40).
+	column 'Failure Points'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a017dff4-8cbe-4790-b059-152272379d9b
+		summarizeBy: none
+		sourceColumn: Failure Points
+
+	/// Score points from recent errors (max 15).
+	column 'Error Points'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1a8468c9-abcb-4645-acd5-b43fc6e7017c
+		summarizeBy: none
+		sourceColumn: Error Points
+
+	/// Score points from sensor deviation versus baseline (max 30).
+	column 'Sensor Points'
+		dataType: decimal
+		isHidden
+		formatString: 0.00
+		lineageTag: a05f2b21-6797-49b1-8ebc-e976c1f7fbf2
+		summarizeBy: none
+		sourceColumn: Sensor Points
+
+	/// Score points from oldest component replacement age (max 15).
+	column 'Maintenance Points'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1c907086-4fe7-4b9b-83ee-568d33c64449
+		summarizeBy: none
+		sourceColumn: Maintenance Points
+
+	/// Rule-based priority score 0-100 = sum of the four point columns; not a probability.
+	column 'Recorded Priority Score'
+		dataType: decimal
+		isHidden
+		formatString: 0.00
+		lineageTag: 59cb99c6-45c6-45d9-9ce4-9f268b9a939d
+		summarizeBy: none
+		sourceColumn: Priority Score
+
+	/// High (score >= 60), Watch (30-59) or lower band.
+	column 'Priority Band'
+		dataType: string
+		lineageTag: 1037ed86-a2a9-4423-883b-d5fa3913455d
+		summarizeBy: none
+		sourceColumn: Priority Band
+
+	/// Text listing the rules that contributed points.
+	column 'Recorded Priority Reasons'
+		dataType: string
+		isHidden
+		lineageTag: 8505bb88-1d56-4f55-88b5-cf87af3470da
+		summarizeBy: none
+		sourceColumn: Priority Reasons
+
+	/// Suggested inspection focus derived from the contributing rules; requires engineering review.
+	column 'Recorded Suggested Inspection'
+		dataType: string
+		isHidden
+		lineageTag: 6e91b1a1-34bf-4d92-ad25-734d17b91ec7
+		summarizeBy: none
+		sourceColumn: Suggested Inspection
+
+	/// End-of-day cutoff used for the snapshot.
+	column 'As Of Timestamp'
+		dataType: dateTime
+		isHidden
+		lineageTag: effdf094-b51e-4fb3-a901-5c06c85645a3
+		summarizeBy: none
+		sourceColumn: As Of Timestamp
+
+	/// Share of expected hourly readings present for the date.
+	column 'Telemetry Completeness'
+		dataType: decimal
+		isHidden
+		formatString: 0.00
+		lineageTag: f11074f8-40d2-4da9-ae9b-8409a54a6f84
+		summarizeBy: none
+		sourceColumn: Telemetry Completeness
+
+	partition 'Daily Health' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(#"Data Folder" & "/daily_health.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"Machine ID", Int64.Type}, {"Date", type datetime}, {"Voltage", type number}, {"Rotation", type number}, {"Pressure", type number}, {"Vibration", type number}, {"Reading Count", Int64.Type}, {"Latest Timestamp", type datetime}, {"Voltage Z", type number}, {"Rotation Z", type number}, {"Pressure Z", type number}, {"Vibration Z", type number}, {"Failures 14 Days", Int64.Type}, {"Errors 7 Days", Int64.Type}, {"comp1 Days Since Replacement", type number}, {"comp2 Days Since Replacement", type number}, {"comp3 Days Since Replacement", type number}, {"comp4 Days Since Replacement", type number}, {"Components With History", Int64.Type}, {"Oldest Component Days", type number}, {"Sensor Deviation Max", type number}, {"Baseline Sensors", Int64.Type}, {"Failure Points", Int64.Type}, {"Error Points", Int64.Type}, {"Sensor Points", type number}, {"Maintenance Points", Int64.Type}, {"Priority Score", type number}, {"Priority Band", type text}, {"Priority Reasons", type text}, {"Suggested Inspection", type text}, {"As Of Timestamp", type datetime}, {"Telemetry Completeness", type number}}, "en-US")
+				in
+				    Typed
+

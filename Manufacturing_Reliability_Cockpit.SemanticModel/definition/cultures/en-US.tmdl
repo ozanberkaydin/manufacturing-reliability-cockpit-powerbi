@@ -1,0 +1,935 @@
+cultureInfo en-US
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "failures.failure_events": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Failures",
+			          "ConceptualProperty": "Failure Events"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Failure Events": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "failures.top_machine_failure_events": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Failures",
+			          "ConceptualProperty": "Top Machine Failure Events"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Top Machine Failure Events": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "failures.plant_insight": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Failures",
+			          "ConceptualProperty": "Plant Insight"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Plant Insight": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "failures.failures_per_1000_observed_hours": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Failures",
+			          "ConceptualProperty": "Failures per 1000 Observed Hours"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Failures per 1000 Observed Hours": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "failures.machines_with_failures": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Failures",
+			          "ConceptualProperty": "Machines With Failures"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Machines With Failures": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "failures.component_cumulative_share": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Failures",
+			          "ConceptualProperty": "Component Cumulative Share"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Component Cumulative Share": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "failures.machine_history_note": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Failures",
+			          "ConceptualProperty": "Machine History Note"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Machine History Note": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "machines.machine": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Machines",
+			          "ConceptualProperty": "Machine"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Machine": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "machines.model": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Machines",
+			          "ConceptualProperty": "Model"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Model": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "machines.machine_context": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Machines",
+			          "ConceptualProperty": "Machine Context"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Machine Context": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "machines.age_band": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Machines",
+			          "ConceptualProperty": "Age Band"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Age Band": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dates.date": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Dates",
+			          "ConceptualProperty": "Date"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Date": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dates.month": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Dates",
+			          "ConceptualProperty": "Month"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Month": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "daily_health.observed_telemetry_hours": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Daily Health",
+			          "ConceptualProperty": "Observed Telemetry Hours"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Observed Telemetry Hours": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "daily_health.latest_observed_timestamp": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Daily Health",
+			          "ConceptualProperty": "Latest Observed Timestamp"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Latest Observed Timestamp": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "daily_health.priority_status": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Daily Health",
+			          "ConceptualProperty": "Priority Status"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Priority Status": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "daily_health.observed_machines": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Daily Health",
+			          "ConceptualProperty": "Observed Machines"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Observed Machines": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "daily_health.failure_score_points": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Daily Health",
+			          "ConceptualProperty": "Failure Score Points"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Failure Score Points": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "daily_health.error_score_points": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Daily Health",
+			          "ConceptualProperty": "Error Score Points"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Error Score Points": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "daily_health.sensor_score_points": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Daily Health",
+			          "ConceptualProperty": "Sensor Score Points"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Sensor Score Points": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "daily_health.maintenance_score_points": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Daily Health",
+			          "ConceptualProperty": "Maintenance Score Points"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Maintenance Score Points": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "daily_health.priority_reasons": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Daily Health",
+			          "ConceptualProperty": "Priority Reasons"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Priority Reasons": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "daily_health.suggested_inspection": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Daily Health",
+			          "ConceptualProperty": "Suggested Inspection"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Suggested Inspection": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "daily_health.high_priority_machines": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Daily Health",
+			          "ConceptualProperty": "High Priority Machines"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "High Priority Machines": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "daily_health.watch_priority_machines": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Daily Health",
+			          "ConceptualProperty": "Watch Priority Machines"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Watch Priority Machines": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "daily_health.priority_rank": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Daily Health",
+			          "ConceptualProperty": "Priority Rank"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Priority Rank": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "daily_health.priority_score": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Daily Health",
+			          "ConceptualProperty": "Priority Score"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Priority Score": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "daily_health.recent_failures_14_days": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Daily Health",
+			          "ConceptualProperty": "Recent Failures 14 Days"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Recent Failures 14 Days": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "daily_health.recent_errors_7_days": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Daily Health",
+			          "ConceptualProperty": "Recent Errors 7 Days"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Recent Errors 7 Days": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "daily_health.maximum_sensor_deviation": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Daily Health",
+			          "ConceptualProperty": "Maximum Sensor Deviation"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Maximum Sensor Deviation": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "daily_health.oldest_component_replacement_days": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Daily Health",
+			          "ConceptualProperty": "Oldest Component Replacement Days"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Oldest Component Replacement Days": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "daily_health.priority_date_label": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Daily Health",
+			          "ConceptualProperty": "Priority Date Label"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Priority Date Label": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "components.component": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Components",
+			          "ConceptualProperty": "Component"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Component": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "sensor_daily.sensor_context": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Sensor Daily",
+			          "ConceptualProperty": "Sensor Context"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Sensor Context": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "sensor_daily.sensor_daily_mean": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Sensor Daily",
+			          "ConceptualProperty": "Sensor Daily Mean"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Sensor Daily Mean": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "sensor_daily.prior_30_day_mean": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Sensor Daily",
+			          "ConceptualProperty": "Prior 30 Day Mean"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Prior 30 Day Mean": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "sensor_daily.sensor_deviation_z": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Sensor Daily",
+			          "ConceptualProperty": "Sensor Deviation Z"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Sensor Deviation Z": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "maintenance.replacement_records": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Maintenance",
+			          "ConceptualProperty": "Replacement Records"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Replacement Records": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "errors.error_events": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Errors",
+			          "ConceptualProperty": "Error Events"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Error Events": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "sensors.sensor": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Sensors",
+			          "ConceptualProperty": "Sensor"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Sensor": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "failure_windows.relative_day": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Failure Windows",
+			          "ConceptualProperty": "Relative Day"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Relative Day": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "failure_windows.failure_window_mean": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Failure Windows",
+			          "ConceptualProperty": "Failure Window Mean"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Failure Window Mean": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "failure_windows.window_event_sample": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Failure Windows",
+			          "ConceptualProperty": "Window Event Sample"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Window Event Sample": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "failure_windows.window_hour_sample": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Failure Windows",
+			          "ConceptualProperty": "Window Hour Sample"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Window Hour Sample": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

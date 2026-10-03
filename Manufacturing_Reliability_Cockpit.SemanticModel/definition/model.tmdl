@@ -1,0 +1,29 @@
+model 'Manufacturing Reliability & Maintenance Cockpit'
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Data Folder"]
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_ProTooling = ["MCP-PBIModeling","DevMode"]
+
+ref table Machines
+ref table Dates
+ref table Components
+ref table Sensors
+ref table Failures
+ref table Errors
+ref table Maintenance
+ref table 'Daily Health'
+ref table 'Sensor Daily'
+ref table 'Failure Windows'
+ref table 'Failure Intervals'
+
+ref cultureInfo en-US
+

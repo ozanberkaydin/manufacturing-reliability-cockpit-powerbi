@@ -1,0 +1,107 @@
+/// One row per component failure event, relative day (-3 through +2), sensor; event-weighted hourly mean. Date is failure date.
+table 'Failure Windows'
+	lineageTag: fe0179db-3dfb-403f-97a0-b58c912ed747
+
+	/// Mean of full 24-hour event-relative bins; equal component-event weighting. Blank unless exactly one sensor is selected. Descriptive association, not causal.
+	measure 'Failure Window Mean' = IF(HASONEVALUE('Failure Windows'[Sensor]), CALCULATE(AVERAGE('Failure Windows'[Mean Reading]), 'Failure Windows'[Complete Bin] = 1))
+		formatString: 0.00
+		displayFolder: Failure Windows
+		lineageTag: e0066aa5-ebbf-45dc-9f6c-75653bba8dc4
+
+	/// Distinct component failure records contributing to full 24-hour bins in selected relative day and sensor.
+	measure 'Window Event Sample' = CALCULATE(DISTINCTCOUNT('Failure Windows'[Event ID]), 'Failure Windows'[Complete Bin] = 1)
+		formatString: #,##0
+		displayFolder: Failure Windows
+		lineageTag: b85ca8fb-9944-4878-b338-bdca980e630b
+
+	/// Sum of event-relative sample hours; overlapping windows reuse telemetry and are not independent observations.
+	measure 'Window Hour Sample' = CALCULATE(SUM('Failure Windows'[Sample Hours]), 'Failure Windows'[Complete Bin] = 1)
+		formatString: #,##0
+		displayFolder: Failure Windows
+		lineageTag: c1201210-dc27-4d12-af4e-e9c2370aa7c4
+
+	/// Identifier of one component failure record.
+	column 'Event ID'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 87726326-ea08-4189-b2a8-a87a927059f1
+		summarizeBy: none
+		sourceColumn: Event ID
+
+	/// One row per component failure event, relative day (-3 through +2), sensor; event-weighted hourly mean. Date is failure date.
+	column 'Machine ID'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 07df5209-f363-4950-ab4b-cf7dd6125dfe
+		summarizeBy: none
+		sourceColumn: Machine ID
+
+	/// One row per component failure event, relative day (-3 through +2), sensor; event-weighted hourly mean. Date is failure date.
+	column Date
+		dataType: dateTime
+		formatString: yyyy-MM-dd
+		lineageTag: 80d1a0f7-19fb-478e-92e1-bf5df033240d
+		summarizeBy: none
+		sourceColumn: Date
+
+	/// Failed component for the event.
+	column Component
+		dataType: string
+		lineageTag: 9760eefe-3946-4856-ae18-fdd3700c8787
+		summarizeBy: none
+		sourceColumn: Component
+
+	/// Day offset from the failure (0 = failure day, negative = before).
+	column 'Relative Day'
+		dataType: int64
+		formatString: 0
+		lineageTag: 56cddee7-7c6f-4188-8ed2-c108e17048ae
+		summarizeBy: none
+		sourceColumn: Relative Day
+
+	/// Telemetry channel averaged in this bin.
+	column Sensor
+		dataType: string
+		lineageTag: 1d67d074-fee2-4377-b63c-0f629bf94854
+		summarizeBy: none
+		sourceColumn: Sensor
+
+	/// Mean Reading. Source sample units, unspecified.
+	column 'Mean Reading'
+		dataType: decimal
+		isHidden
+		formatString: 0.00
+		lineageTag: e8f00f35-7ff6-4f63-997d-909f92dbbccd
+		summarizeBy: none
+		sourceColumn: Mean Reading
+
+	/// Hourly readings contributing to the bin.
+	column 'Sample Hours'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b030278d-d904-42e0-88a9-98758e9a4249
+		summarizeBy: none
+		sourceColumn: Sample Hours
+
+	/// 1 when the bin holds a full 24 hours of readings; measures use only complete bins.
+	column 'Complete Bin'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: bab5b905-46ae-48e1-904d-f24462aaa325
+		summarizeBy: none
+		sourceColumn: Complete Bin
+
+	partition 'Failure Windows' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(#"Data Folder" & "/failure_windows.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"Event ID", Int64.Type}, {"Machine ID", Int64.Type}, {"Date", type datetime}, {"Component", type text}, {"Relative Day", Int64.Type}, {"Sensor", type text}, {"Mean Reading", type number}, {"Sample Hours", Int64.Type}, {"Complete Bin", Int64.Type}}, "en-US")
+				in
+				    Typed
+

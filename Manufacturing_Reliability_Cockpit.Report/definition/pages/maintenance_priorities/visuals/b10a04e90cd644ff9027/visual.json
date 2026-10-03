@@ -1,0 +1,620 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "b10a04e90cd644ff9027",
+  "position": {
+    "x": 32,
+    "y": 408,
+    "z": 15000,
+    "height": 312,
+    "width": 1856,
+    "tabOrder": 15000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Machines"
+                    }
+                  },
+                  "Property": "Machine"
+                }
+              },
+              "queryRef": "Machines.Machine",
+              "nativeQueryRef": "Machine",
+              "displayName": "Machine"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Machines"
+                    }
+                  },
+                  "Property": "Model"
+                }
+              },
+              "queryRef": "Machines.Model",
+              "nativeQueryRef": "Model",
+              "displayName": "Model"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Daily Health"
+                    }
+                  },
+                  "Property": "Priority Rank"
+                }
+              },
+              "queryRef": "Daily Health.Priority Rank",
+              "nativeQueryRef": "Priority Rank",
+              "displayName": "Priority Rank"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Daily Health"
+                    }
+                  },
+                  "Property": "Priority Score"
+                }
+              },
+              "queryRef": "Daily Health.Priority Score",
+              "nativeQueryRef": "Priority Score",
+              "displayName": "Priority Score"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Daily Health"
+                    }
+                  },
+                  "Property": "Priority Status"
+                }
+              },
+              "queryRef": "Daily Health.Priority Status",
+              "nativeQueryRef": "Priority Status",
+              "displayName": "Priority Status"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Daily Health"
+                    }
+                  },
+                  "Property": "Recent Failures 14 Days"
+                }
+              },
+              "queryRef": "Daily Health.Recent Failures 14 Days",
+              "nativeQueryRef": "Recent Failures 14 Days",
+              "displayName": "Recent Failures 14 Days"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Daily Health"
+                    }
+                  },
+                  "Property": "Recent Errors 7 Days"
+                }
+              },
+              "queryRef": "Daily Health.Recent Errors 7 Days",
+              "nativeQueryRef": "Recent Errors 7 Days",
+              "displayName": "Recent Errors 7 Days"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Daily Health"
+                    }
+                  },
+                  "Property": "Maximum Sensor Deviation"
+                }
+              },
+              "queryRef": "Daily Health.Maximum Sensor Deviation",
+              "nativeQueryRef": "Maximum Sensor Deviation",
+              "displayName": "Maximum Sensor Deviation"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Daily Health"
+                    }
+                  },
+                  "Property": "Oldest Component Replacement Days"
+                }
+              },
+              "queryRef": "Daily Health.Oldest Component Replacement Days",
+              "nativeQueryRef": "Oldest Component Replacement Days",
+              "displayName": "Oldest Component Replacement Days"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Daily Health"
+                  }
+                },
+                "Property": "Priority Score"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#17324D'"
+                    }
+                  }
+                }
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E8F0F3'"
+                    }
+                  }
+                }
+              }
+            },
+            "columnAdjustment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'growToFit'"
+                }
+              }
+            },
+            "autoSizeColumnWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            },
+            "fontColorPrimary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#17324D'"
+                    }
+                  }
+                }
+              }
+            },
+            "backColorPrimary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "backColorSecondary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#F3F6F8'"
+                    }
+                  }
+                }
+              }
+            },
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "grid": [
+        {
+          "properties": {
+            "rowPadding": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualTooltip": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Maintenance inspection queue | select a machine row to drill through'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Maintenance inspection queue | select a machine row to drill through'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#17324D'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Segoe UI Semibold'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "stylePreset": [
+        {
+          "properties": {
+            "name": {
+              "expr": {
+                "Literal": {
+                  "Value": "'None'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "17eedd08de5665256937",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Machines"
+              }
+            },
+            "Property": "Machine"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "176e3aef8e111be5beef",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Machines"
+              }
+            },
+            "Property": "Model"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "cb92225c343e631c8555",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Daily Health"
+              }
+            },
+            "Property": "Priority Rank"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "03d36a9bb56415abfd97",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Daily Health"
+              }
+            },
+            "Property": "Priority Score"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "8901afb079f16714ecd6",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Daily Health"
+              }
+            },
+            "Property": "Priority Status"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "0dddcb8812b6e02cb675",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Daily Health"
+              }
+            },
+            "Property": "Recent Failures 14 Days"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a76b19d3d608c5f8b00e",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Daily Health"
+              }
+            },
+            "Property": "Recent Errors 7 Days"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "57737ffcd82913e2c242",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Daily Health"
+              }
+            },
+            "Property": "Maximum Sensor Deviation"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "59602ebcb04817b24bc1",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Daily Health"
+              }
+            },
+            "Property": "Oldest Component Replacement Days"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

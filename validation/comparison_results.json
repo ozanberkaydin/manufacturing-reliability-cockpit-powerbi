@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "full_totals": "matched",
+  "date_machine_filters": 3,
+  "default_2015_totals": "matched",
+  "top_10_scores_reasons_dense_ranks": "matched",
+  "sensor_mean_prior_reference_z": "matched",
+  "measures_executed": 41,
+  "numeric_tolerance": 0.0001
+}

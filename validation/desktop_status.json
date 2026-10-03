@@ -1,0 +1,1 @@
+{"error":{"code":"HOST_UNAVAILABLE","message":"Power BI Desktop is running, but no open instance has this report's folder open.","hint":"Open this report's .pbip in Power BI Desktop, or check that the correct folder was passed.","retryable":false,"details":{"runningInstances":[14824]}}}

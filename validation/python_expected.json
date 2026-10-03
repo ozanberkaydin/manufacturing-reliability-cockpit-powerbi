@@ -1,0 +1,108 @@
+{
+  "machines": 100,
+  "telemetry_hours": 876100,
+  "failure_events": 761,
+  "machines_with_failure": 98,
+  "error_events": 3919,
+  "replacement_records": 3286,
+  "daily_rows": 36600,
+  "sensor_daily_rows": 146400,
+  "failure_events_per_1000_observed_hours": 0.8686223033900239,
+  "mean_completed_gap_hours": 1107.2898550724638,
+  "completed_gap_count": 621,
+  "priority_score_min": 0.0,
+  "priority_score_max": 95.8,
+  "prefix_invariance": "passed at 2015-06-30",
+  "telemetry_start": "2015-01-01 06:00:00",
+  "telemetry_end": "2016-01-01 06:00:00",
+  "filter_expectations": [
+    {
+      "machine": 1,
+      "start": "2015-01-01",
+      "end": "2015-01-31",
+      "failures": 1,
+      "errors": 7,
+      "hours": 738
+    },
+    {
+      "machine": 42,
+      "start": "2015-04-01",
+      "end": "2015-06-30",
+      "failures": 4,
+      "errors": 12,
+      "hours": 2184
+    },
+    {
+      "machine": null,
+      "start": "2015-07-01",
+      "end": "2015-07-31",
+      "failures": 64,
+      "errors": 299,
+      "hours": 74400
+    }
+  ],
+  "failures_by_component": {
+    "comp1": 192,
+    "comp2": 259,
+    "comp3": 131,
+    "comp4": 179
+  },
+  "failures_by_model": {
+    "model1": 189,
+    "model2": 168,
+    "model3": 221,
+    "model4": 183
+  },
+  "priority_top_10_at_2015_12_31": [
+    {
+      "Machine ID": 88,
+      "Priority Score": 71.0,
+      "Priority Reasons": "1 failures /14d; 2 errors /7d; max |z| 8.3; oldest component 91d"
+    },
+    {
+      "Machine ID": 15,
+      "Priority Score": 68.0,
+      "Priority Reasons": "1 failures /14d; 1 errors /7d; max |z| 8.0; oldest component 120d"
+    },
+    {
+      "Machine ID": 21,
+      "Priority Score": 61.0,
+      "Priority Reasons": "1 failures /14d; 1 errors /7d; max |z| 7.6; oldest component 72d"
+    },
+    {
+      "Machine ID": 54,
+      "Priority Score": 58.2,
+      "Priority Reasons": "1 failures /14d; 3 errors /7d; max |z| 2.9; oldest component 110d"
+    },
+    {
+      "Machine ID": 83,
+      "Priority Score": 57.0,
+      "Priority Reasons": "2 failures /14d; 3 errors /7d; max |z| 1.0; oldest component 64d"
+    },
+    {
+      "Machine ID": 85,
+      "Priority Score": 53.0,
+      "Priority Reasons": "1 failures /14d; 1 errors /7d; max |z| 6.8; oldest component 50d"
+    },
+    {
+      "Machine ID": 44,
+      "Priority Score": 51.0,
+      "Priority Reasons": "0 failures /14d; 2 errors /7d; max |z| 9.3; oldest component 110d"
+    },
+    {
+      "Machine ID": 71,
+      "Priority Score": 51.0,
+      "Priority Reasons": "0 failures /14d; 2 errors /7d; max |z| 7.6; oldest component 99d"
+    },
+    {
+      "Machine ID": 79,
+      "Priority Score": 51.0,
+      "Priority Reasons": "0 failures /14d; 2 errors /7d; max |z| 7.5; oldest component 108d"
+    },
+    {
+      "Machine ID": 50,
+      "Priority Score": 50.7,
+      "Priority Reasons": "0 failures /14d; 2 errors /7d; max |z| 4.0; oldest component 95d"
+    }
+  ]
+}

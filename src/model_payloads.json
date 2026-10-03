@@ -1,0 +1,1454 @@
+{
+  "tables": [
+    {
+      "name": "Machines",
+      "description": "One row per machine; static model and recorded age in years.",
+      "mode": "Import",
+      "partitionName": "Machines",
+      "mExpression": "let\n    Source = Csv.Document(File.Contents(#\"Data Folder\" & \"/machines.csv\"), [Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),\n    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),\n    Typed = Table.TransformColumnTypes(Headers, {{\"Machine ID\", Int64.Type}, {\"Model\", type text}, {\"Age Years\", Int64.Type}, {\"Machine\", type text}, {\"Age Band\", type text}}, \"en-US\")\nin\n    Typed",
+      "columns": [
+        {
+          "name": "Machine ID",
+          "sourceColumn": "Machine ID",
+          "dataType": "Int64",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": true,
+          "formatString": "0",
+          "description": "One row per machine; static model and recorded age in years."
+        },
+        {
+          "name": "Model",
+          "sourceColumn": "Model",
+          "dataType": "String",
+          "summarizeBy": "None",
+          "isHidden": false,
+          "isKey": false,
+          "formatString": null,
+          "description": "Model. See README for definitions."
+        },
+        {
+          "name": "Age Years",
+          "sourceColumn": "Age Years",
+          "dataType": "Int64",
+          "summarizeBy": "None",
+          "isHidden": false,
+          "isKey": false,
+          "formatString": "0",
+          "description": "Age Years. See README for definitions."
+        },
+        {
+          "name": "Machine",
+          "sourceColumn": "Machine",
+          "dataType": "String",
+          "summarizeBy": "None",
+          "isHidden": false,
+          "isKey": false,
+          "formatString": null,
+          "description": "Machine. See README for definitions."
+        },
+        {
+          "name": "Age Band",
+          "sourceColumn": "Age Band",
+          "dataType": "String",
+          "summarizeBy": "None",
+          "isHidden": false,
+          "isKey": false,
+          "formatString": null,
+          "description": "Age Band. See README for definitions."
+        }
+      ]
+    },
+    {
+      "name": "Dates",
+      "description": "One row per calendar day; covers maintenance history and telemetry.",
+      "mode": "Import",
+      "partitionName": "Dates",
+      "mExpression": "let\n    Source = Csv.Document(File.Contents(#\"Data Folder\" & \"/dates.csv\"), [Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),\n    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),\n    Typed = Table.TransformColumnTypes(Headers, {{\"Date\", type datetime}, {\"Year\", Int64.Type}, {\"Month\", type text}, {\"Month Number\", Int64.Type}, {\"Quarter\", type text}, {\"In Telemetry Period\", Int64.Type}}, \"en-US\")\nin\n    Typed",
+      "columns": [
+        {
+          "name": "Date",
+          "sourceColumn": "Date",
+          "dataType": "DateTime",
+          "summarizeBy": "None",
+          "isHidden": false,
+          "isKey": true,
+          "formatString": "yyyy-MM-dd",
+          "description": "One row per calendar day; covers maintenance history and telemetry."
+        },
+        {
+          "name": "Year",
+          "sourceColumn": "Year",
+          "dataType": "Int64",
+          "summarizeBy": "None",
+          "isHidden": false,
+          "isKey": false,
+          "formatString": "0",
+          "description": "Year. See README for definitions."
+        },
+        {
+          "name": "Month",
+          "sourceColumn": "Month",
+          "dataType": "String",
+          "summarizeBy": "None",
+          "isHidden": false,
+          "isKey": false,
+          "formatString": null,
+          "description": "Month. See README for definitions."
+        },
+        {
+          "name": "Month Number",
+          "sourceColumn": "Month Number",
+          "dataType": "Int64",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0",
+          "description": "Month Number. See README for definitions."
+        },
+        {
+          "name": "Quarter",
+          "sourceColumn": "Quarter",
+          "dataType": "String",
+          "summarizeBy": "None",
+          "isHidden": false,
+          "isKey": false,
+          "formatString": null,
+          "description": "Quarter. See README for definitions."
+        },
+        {
+          "name": "In Telemetry Period",
+          "sourceColumn": "In Telemetry Period",
+          "dataType": "Int64",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0",
+          "description": "In Telemetry Period. See README for definitions."
+        }
+      ]
+    },
+    {
+      "name": "Components",
+      "description": "One row per coded component; physical identities are unspecified.",
+      "mode": "Import",
+      "partitionName": "Components",
+      "mExpression": "let\n    Source = Csv.Document(File.Contents(#\"Data Folder\" & \"/components.csv\"), [Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),\n    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),\n    Typed = Table.TransformColumnTypes(Headers, {{\"Component\", type text}}, \"en-US\")\nin\n    Typed",
+      "columns": [
+        {
+          "name": "Component",
+          "sourceColumn": "Component",
+          "dataType": "String",
+          "summarizeBy": "None",
+          "isHidden": false,
+          "isKey": true,
+          "formatString": null,
+          "description": "Component. See README for definitions."
+        }
+      ]
+    },
+    {
+      "name": "Sensors",
+      "description": "One row per sensor. Physical units are unspecified in the authoritative notebook.",
+      "mode": "Import",
+      "partitionName": "Sensors",
+      "mExpression": "let\n    Source = Csv.Document(File.Contents(#\"Data Folder\" & \"/sensors.csv\"), [Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),\n    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),\n    Typed = Table.TransformColumnTypes(Headers, {{\"Sensor\", type text}, {\"Unit\", type text}}, \"en-US\")\nin\n    Typed",
+      "columns": [
+        {
+          "name": "Sensor",
+          "sourceColumn": "Sensor",
+          "dataType": "String",
+          "summarizeBy": "None",
+          "isHidden": false,
+          "isKey": true,
+          "formatString": null,
+          "description": "Sensor. See README for definitions."
+        },
+        {
+          "name": "Unit",
+          "sourceColumn": "Unit",
+          "dataType": "String",
+          "summarizeBy": "None",
+          "isHidden": false,
+          "isKey": false,
+          "formatString": null,
+          "description": "Unit. See README for definitions."
+        }
+      ]
+    },
+    {
+      "name": "Failures",
+      "description": "One row per timestamp, machine, component failure/replacement record; simultaneous components preserved.",
+      "mode": "Import",
+      "partitionName": "Failures",
+      "mExpression": "let\n    Source = Csv.Document(File.Contents(#\"Data Folder\" & \"/failures.csv\"), [Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),\n    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),\n    Typed = Table.TransformColumnTypes(Headers, {{\"Timestamp\", type datetime}, {\"Machine ID\", Int64.Type}, {\"Component\", type text}, {\"Date\", type datetime}}, \"en-US\")\nin\n    Typed",
+      "columns": [
+        {
+          "name": "Timestamp",
+          "sourceColumn": "Timestamp",
+          "dataType": "DateTime",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": null,
+          "description": "Timestamp. See README for definitions."
+        },
+        {
+          "name": "Machine ID",
+          "sourceColumn": "Machine ID",
+          "dataType": "Int64",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0",
+          "description": "One row per timestamp, machine, component failure/replacement record; simultaneous components preserved."
+        },
+        {
+          "name": "Component",
+          "sourceColumn": "Component",
+          "dataType": "String",
+          "summarizeBy": "None",
+          "isHidden": false,
+          "isKey": false,
+          "formatString": null,
+          "description": "Component. See README for definitions."
+        },
+        {
+          "name": "Date",
+          "sourceColumn": "Date",
+          "dataType": "DateTime",
+          "summarizeBy": "None",
+          "isHidden": false,
+          "isKey": false,
+          "formatString": "yyyy-MM-dd",
+          "description": "One row per timestamp, machine, component failure/replacement record; simultaneous components preserved."
+        }
+      ]
+    },
+    {
+      "name": "Errors",
+      "description": "One row per timestamp, machine, error code; non-breaking errors.",
+      "mode": "Import",
+      "partitionName": "Errors",
+      "mExpression": "let\n    Source = Csv.Document(File.Contents(#\"Data Folder\" & \"/errors.csv\"), [Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),\n    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),\n    Typed = Table.TransformColumnTypes(Headers, {{\"Timestamp\", type datetime}, {\"Machine ID\", Int64.Type}, {\"Error\", type text}, {\"Date\", type datetime}}, \"en-US\")\nin\n    Typed",
+      "columns": [
+        {
+          "name": "Timestamp",
+          "sourceColumn": "Timestamp",
+          "dataType": "DateTime",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": null,
+          "description": "Timestamp. See README for definitions."
+        },
+        {
+          "name": "Machine ID",
+          "sourceColumn": "Machine ID",
+          "dataType": "Int64",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0",
+          "description": "One row per timestamp, machine, error code; non-breaking errors."
+        },
+        {
+          "name": "Error",
+          "sourceColumn": "Error",
+          "dataType": "String",
+          "summarizeBy": "None",
+          "isHidden": false,
+          "isKey": false,
+          "formatString": null,
+          "description": "Error. See README for definitions."
+        },
+        {
+          "name": "Date",
+          "sourceColumn": "Date",
+          "dataType": "DateTime",
+          "summarizeBy": "None",
+          "isHidden": false,
+          "isKey": false,
+          "formatString": "yyyy-MM-dd",
+          "description": "One row per timestamp, machine, error code; non-breaking errors."
+        }
+      ]
+    },
+    {
+      "name": "Maintenance",
+      "description": "One row per timestamp, machine, component replacement; includes failure-related replacements.",
+      "mode": "Import",
+      "partitionName": "Maintenance",
+      "mExpression": "let\n    Source = Csv.Document(File.Contents(#\"Data Folder\" & \"/maintenance.csv\"), [Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),\n    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),\n    Typed = Table.TransformColumnTypes(Headers, {{\"Timestamp\", type datetime}, {\"Machine ID\", Int64.Type}, {\"Component\", type text}, {\"Date\", type datetime}}, \"en-US\")\nin\n    Typed",
+      "columns": [
+        {
+          "name": "Timestamp",
+          "sourceColumn": "Timestamp",
+          "dataType": "DateTime",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": null,
+          "description": "Timestamp. See README for definitions."
+        },
+        {
+          "name": "Machine ID",
+          "sourceColumn": "Machine ID",
+          "dataType": "Int64",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0",
+          "description": "One row per timestamp, machine, component replacement; includes failure-related replacements."
+        },
+        {
+          "name": "Component",
+          "sourceColumn": "Component",
+          "dataType": "String",
+          "summarizeBy": "None",
+          "isHidden": false,
+          "isKey": false,
+          "formatString": null,
+          "description": "Component. See README for definitions."
+        },
+        {
+          "name": "Date",
+          "sourceColumn": "Date",
+          "dataType": "DateTime",
+          "summarizeBy": "None",
+          "isHidden": false,
+          "isKey": false,
+          "formatString": "yyyy-MM-dd",
+          "description": "One row per timestamp, machine, component replacement; includes failure-related replacements."
+        }
+      ]
+    },
+    {
+      "name": "Daily Health",
+      "description": "One row per machine, date with end-of-day score and daily telemetry summary. Only past/current records contribute.",
+      "mode": "Import",
+      "partitionName": "Daily Health",
+      "mExpression": "let\n    Source = Csv.Document(File.Contents(#\"Data Folder\" & \"/daily_health.csv\"), [Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),\n    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),\n    Typed = Table.TransformColumnTypes(Headers, {{\"Machine ID\", Int64.Type}, {\"Date\", type datetime}, {\"Voltage\", type number}, {\"Rotation\", type number}, {\"Pressure\", type number}, {\"Vibration\", type number}, {\"Reading Count\", Int64.Type}, {\"Latest Timestamp\", type datetime}, {\"Voltage Z\", type number}, {\"Rotation Z\", type number}, {\"Pressure Z\", type number}, {\"Vibration Z\", type number}, {\"Failures 14 Days\", Int64.Type}, {\"Errors 7 Days\", Int64.Type}, {\"comp1 Days Since Replacement\", type number}, {\"comp2 Days Since Replacement\", type number}, {\"comp3 Days Since Replacement\", type number}, {\"comp4 Days Since Replacement\", type number}, {\"Components With History\", Int64.Type}, {\"Oldest Component Days\", type number}, {\"Sensor Deviation Max\", type number}, {\"Baseline Sensors\", Int64.Type}, {\"Failure Points\", Int64.Type}, {\"Error Points\", Int64.Type}, {\"Sensor Points\", type number}, {\"Maintenance Points\", Int64.Type}, {\"Priority Score\", type number}, {\"Priority Band\", type text}, {\"Priority Reasons\", type text}, {\"Suggested Inspection\", type text}, {\"As Of Timestamp\", type datetime}, {\"Telemetry Completeness\", type number}}, \"en-US\")\nin\n    Typed",
+      "columns": [
+        {
+          "name": "Machine ID",
+          "sourceColumn": "Machine ID",
+          "dataType": "Int64",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0",
+          "description": "One row per machine, date with end-of-day score and daily telemetry summary. Only past/current records contribute."
+        },
+        {
+          "name": "Date",
+          "sourceColumn": "Date",
+          "dataType": "DateTime",
+          "summarizeBy": "None",
+          "isHidden": false,
+          "isKey": false,
+          "formatString": "yyyy-MM-dd",
+          "description": "One row per machine, date with end-of-day score and daily telemetry summary. Only past/current records contribute."
+        },
+        {
+          "name": "Voltage",
+          "sourceColumn": "Voltage",
+          "dataType": "Decimal",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0.00",
+          "description": "Voltage. See README for definitions."
+        },
+        {
+          "name": "Rotation",
+          "sourceColumn": "Rotation",
+          "dataType": "Decimal",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0.00",
+          "description": "Rotation. See README for definitions."
+        },
+        {
+          "name": "Pressure",
+          "sourceColumn": "Pressure",
+          "dataType": "Decimal",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0.00",
+          "description": "Pressure. See README for definitions."
+        },
+        {
+          "name": "Vibration",
+          "sourceColumn": "Vibration",
+          "dataType": "Decimal",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0.00",
+          "description": "Vibration. See README for definitions."
+        },
+        {
+          "name": "Reading Count",
+          "sourceColumn": "Reading Count",
+          "dataType": "Int64",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0",
+          "description": "Reading Count. See README for definitions."
+        },
+        {
+          "name": "Latest Timestamp",
+          "sourceColumn": "Latest Timestamp",
+          "dataType": "DateTime",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": null,
+          "description": "Latest Timestamp. See README for definitions."
+        },
+        {
+          "name": "Voltage Z",
+          "sourceColumn": "Voltage Z",
+          "dataType": "Decimal",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0.00",
+          "description": "Voltage Z. See README for definitions."
+        },
+        {
+          "name": "Rotation Z",
+          "sourceColumn": "Rotation Z",
+          "dataType": "Decimal",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0.00",
+          "description": "Rotation Z. See README for definitions."
+        },
+        {
+          "name": "Pressure Z",
+          "sourceColumn": "Pressure Z",
+          "dataType": "Decimal",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0.00",
+          "description": "Pressure Z. See README for definitions."
+        },
+        {
+          "name": "Vibration Z",
+          "sourceColumn": "Vibration Z",
+          "dataType": "Decimal",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0.00",
+          "description": "Vibration Z. See README for definitions."
+        },
+        {
+          "name": "Failures 14 Days",
+          "sourceColumn": "Failures 14 Days",
+          "dataType": "Int64",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0",
+          "description": "Failures 14 Days. See README for definitions."
+        },
+        {
+          "name": "Errors 7 Days",
+          "sourceColumn": "Errors 7 Days",
+          "dataType": "Int64",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0",
+          "description": "Errors 7 Days. See README for definitions."
+        },
+        {
+          "name": "comp1 Days Since Replacement",
+          "sourceColumn": "comp1 Days Since Replacement",
+          "dataType": "Decimal",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0.00",
+          "description": "comp1 Days Since Replacement. See README for definitions."
+        },
+        {
+          "name": "comp2 Days Since Replacement",
+          "sourceColumn": "comp2 Days Since Replacement",
+          "dataType": "Decimal",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0.00",
+          "description": "comp2 Days Since Replacement. See README for definitions."
+        },
+        {
+          "name": "comp3 Days Since Replacement",
+          "sourceColumn": "comp3 Days Since Replacement",
+          "dataType": "Decimal",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0.00",
+          "description": "comp3 Days Since Replacement. See README for definitions."
+        },
+        {
+          "name": "comp4 Days Since Replacement",
+          "sourceColumn": "comp4 Days Since Replacement",
+          "dataType": "Decimal",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0.00",
+          "description": "comp4 Days Since Replacement. See README for definitions."
+        },
+        {
+          "name": "Components With History",
+          "sourceColumn": "Components With History",
+          "dataType": "Int64",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0",
+          "description": "Components With History. See README for definitions."
+        },
+        {
+          "name": "Oldest Component Days",
+          "sourceColumn": "Oldest Component Days",
+          "dataType": "Decimal",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0.00",
+          "description": "Oldest Component Days. See README for definitions."
+        },
+        {
+          "name": "Sensor Deviation Max",
+          "sourceColumn": "Sensor Deviation Max",
+          "dataType": "Decimal",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0.00",
+          "description": "Sensor Deviation Max. See README for definitions."
+        },
+        {
+          "name": "Baseline Sensors",
+          "sourceColumn": "Baseline Sensors",
+          "dataType": "Int64",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0",
+          "description": "Baseline Sensors. See README for definitions."
+        },
+        {
+          "name": "Failure Points",
+          "sourceColumn": "Failure Points",
+          "dataType": "Int64",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0",
+          "description": "Failure Points. See README for definitions."
+        },
+        {
+          "name": "Error Points",
+          "sourceColumn": "Error Points",
+          "dataType": "Int64",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0",
+          "description": "Error Points. See README for definitions."
+        },
+        {
+          "name": "Sensor Points",
+          "sourceColumn": "Sensor Points",
+          "dataType": "Decimal",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0.00",
+          "description": "Sensor Points. See README for definitions."
+        },
+        {
+          "name": "Maintenance Points",
+          "sourceColumn": "Maintenance Points",
+          "dataType": "Int64",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0",
+          "description": "Maintenance Points. See README for definitions."
+        },
+        {
+          "name": "Recorded Priority Score",
+          "sourceColumn": "Priority Score",
+          "dataType": "Decimal",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0.00",
+          "description": "Priority Score. See README for definitions."
+        },
+        {
+          "name": "Priority Band",
+          "sourceColumn": "Priority Band",
+          "dataType": "String",
+          "summarizeBy": "None",
+          "isHidden": false,
+          "isKey": false,
+          "formatString": null,
+          "description": "Priority Band. See README for definitions."
+        },
+        {
+          "name": "Recorded Priority Reasons",
+          "sourceColumn": "Priority Reasons",
+          "dataType": "String",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": null,
+          "description": "Priority Reasons. See README for definitions."
+        },
+        {
+          "name": "Recorded Suggested Inspection",
+          "sourceColumn": "Suggested Inspection",
+          "dataType": "String",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": null,
+          "description": "Suggested Inspection. See README for definitions."
+        },
+        {
+          "name": "As Of Timestamp",
+          "sourceColumn": "As Of Timestamp",
+          "dataType": "DateTime",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": null,
+          "description": "As Of Timestamp. See README for definitions."
+        },
+        {
+          "name": "Telemetry Completeness",
+          "sourceColumn": "Telemetry Completeness",
+          "dataType": "Decimal",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0.00",
+          "description": "Telemetry Completeness. See README for definitions."
+        }
+      ]
+    },
+    {
+      "name": "Sensor Daily",
+      "description": "One row per machine, date, sensor. Prior reference uses preceding 30 days with minimum 7 days.",
+      "mode": "Import",
+      "partitionName": "Sensor Daily",
+      "mExpression": "let\n    Source = Csv.Document(File.Contents(#\"Data Folder\" & \"/sensor_daily.csv\"), [Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),\n    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),\n    Typed = Table.TransformColumnTypes(Headers, {{\"Machine ID\", Int64.Type}, {\"Date\", type datetime}, {\"Sensor\", type text}, {\"Mean Reading\", type number}, {\"Prior Mean\", type number}, {\"Prior Std\", type number}, {\"Deviation Z\", type number}, {\"Reading Count\", Int64.Type}, {\"Unit\", type text}}, \"en-US\")\nin\n    Typed",
+      "columns": [
+        {
+          "name": "Machine ID",
+          "sourceColumn": "Machine ID",
+          "dataType": "Int64",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0",
+          "description": "One row per machine, date, sensor. Prior reference uses preceding 30 days with minimum 7 days."
+        },
+        {
+          "name": "Date",
+          "sourceColumn": "Date",
+          "dataType": "DateTime",
+          "summarizeBy": "None",
+          "isHidden": false,
+          "isKey": false,
+          "formatString": "yyyy-MM-dd",
+          "description": "One row per machine, date, sensor. Prior reference uses preceding 30 days with minimum 7 days."
+        },
+        {
+          "name": "Sensor",
+          "sourceColumn": "Sensor",
+          "dataType": "String",
+          "summarizeBy": "None",
+          "isHidden": false,
+          "isKey": false,
+          "formatString": null,
+          "description": "Sensor. See README for definitions."
+        },
+        {
+          "name": "Mean Reading",
+          "sourceColumn": "Mean Reading",
+          "dataType": "Decimal",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0.00",
+          "description": "Mean Reading. Source sample units, unspecified."
+        },
+        {
+          "name": "Prior Mean",
+          "sourceColumn": "Prior Mean",
+          "dataType": "Decimal",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0.00",
+          "description": "Prior Mean. Source sample units, unspecified."
+        },
+        {
+          "name": "Prior Std",
+          "sourceColumn": "Prior Std",
+          "dataType": "Decimal",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0.00",
+          "description": "Prior Std. Source sample units, unspecified."
+        },
+        {
+          "name": "Deviation Z",
+          "sourceColumn": "Deviation Z",
+          "dataType": "Decimal",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0.00",
+          "description": "Deviation Z. See README for definitions."
+        },
+        {
+          "name": "Reading Count",
+          "sourceColumn": "Reading Count",
+          "dataType": "Int64",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0",
+          "description": "Reading Count. See README for definitions."
+        },
+        {
+          "name": "Unit",
+          "sourceColumn": "Unit",
+          "dataType": "String",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": null,
+          "description": "Unit. See README for definitions."
+        }
+      ]
+    },
+    {
+      "name": "Failure Windows",
+      "description": "One row per component failure event, relative day (-3 through +2), sensor; event-weighted hourly mean. Date is failure date.",
+      "mode": "Import",
+      "partitionName": "Failure Windows",
+      "mExpression": "let\n    Source = Csv.Document(File.Contents(#\"Data Folder\" & \"/failure_windows.csv\"), [Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),\n    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),\n    Typed = Table.TransformColumnTypes(Headers, {{\"Event ID\", Int64.Type}, {\"Machine ID\", Int64.Type}, {\"Date\", type datetime}, {\"Component\", type text}, {\"Relative Day\", Int64.Type}, {\"Sensor\", type text}, {\"Mean Reading\", type number}, {\"Sample Hours\", Int64.Type}, {\"Complete Bin\", Int64.Type}}, \"en-US\")\nin\n    Typed",
+      "columns": [
+        {
+          "name": "Event ID",
+          "sourceColumn": "Event ID",
+          "dataType": "Int64",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0",
+          "description": "Event ID. See README for definitions."
+        },
+        {
+          "name": "Machine ID",
+          "sourceColumn": "Machine ID",
+          "dataType": "Int64",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0",
+          "description": "One row per component failure event, relative day (-3 through +2), sensor; event-weighted hourly mean. Date is failure date."
+        },
+        {
+          "name": "Date",
+          "sourceColumn": "Date",
+          "dataType": "DateTime",
+          "summarizeBy": "None",
+          "isHidden": false,
+          "isKey": false,
+          "formatString": "yyyy-MM-dd",
+          "description": "One row per component failure event, relative day (-3 through +2), sensor; event-weighted hourly mean. Date is failure date."
+        },
+        {
+          "name": "Component",
+          "sourceColumn": "Component",
+          "dataType": "String",
+          "summarizeBy": "None",
+          "isHidden": false,
+          "isKey": false,
+          "formatString": null,
+          "description": "Component. See README for definitions."
+        },
+        {
+          "name": "Relative Day",
+          "sourceColumn": "Relative Day",
+          "dataType": "Int64",
+          "summarizeBy": "None",
+          "isHidden": false,
+          "isKey": false,
+          "formatString": "0",
+          "description": "Relative Day. See README for definitions."
+        },
+        {
+          "name": "Sensor",
+          "sourceColumn": "Sensor",
+          "dataType": "String",
+          "summarizeBy": "None",
+          "isHidden": false,
+          "isKey": false,
+          "formatString": null,
+          "description": "Sensor. See README for definitions."
+        },
+        {
+          "name": "Mean Reading",
+          "sourceColumn": "Mean Reading",
+          "dataType": "Decimal",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0.00",
+          "description": "Mean Reading. Source sample units, unspecified."
+        },
+        {
+          "name": "Sample Hours",
+          "sourceColumn": "Sample Hours",
+          "dataType": "Int64",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0",
+          "description": "Sample Hours. See README for definitions."
+        },
+        {
+          "name": "Complete Bin",
+          "sourceColumn": "Complete Bin",
+          "dataType": "Int64",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0",
+          "description": "Complete Bin. See README for definitions."
+        }
+      ]
+    },
+    {
+      "name": "Failure Intervals",
+      "description": "One row per completed gap between distinct consecutive machine failure timestamps. Date is ending event date.",
+      "mode": "Import",
+      "partitionName": "Failure Intervals",
+      "mExpression": "let\n    Source = Csv.Document(File.Contents(#\"Data Folder\" & \"/failure_intervals.csv\"), [Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),\n    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),\n    Typed = Table.TransformColumnTypes(Headers, {{\"Machine ID\", Int64.Type}, {\"Timestamp\", type datetime}, {\"Date\", type datetime}, {\"Previous Failure\", type datetime}, {\"Gap Hours\", type number}}, \"en-US\")\nin\n    Typed",
+      "columns": [
+        {
+          "name": "Machine ID",
+          "sourceColumn": "Machine ID",
+          "dataType": "Int64",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0",
+          "description": "One row per completed gap between distinct consecutive machine failure timestamps. Date is ending event date."
+        },
+        {
+          "name": "Timestamp",
+          "sourceColumn": "Timestamp",
+          "dataType": "DateTime",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": null,
+          "description": "Timestamp. See README for definitions."
+        },
+        {
+          "name": "Date",
+          "sourceColumn": "Date",
+          "dataType": "DateTime",
+          "summarizeBy": "None",
+          "isHidden": false,
+          "isKey": false,
+          "formatString": "yyyy-MM-dd",
+          "description": "One row per completed gap between distinct consecutive machine failure timestamps. Date is ending event date."
+        },
+        {
+          "name": "Previous Failure",
+          "sourceColumn": "Previous Failure",
+          "dataType": "DateTime",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": null,
+          "description": "Previous Failure. See README for definitions."
+        },
+        {
+          "name": "Gap Hours",
+          "sourceColumn": "Gap Hours",
+          "dataType": "Decimal",
+          "summarizeBy": "None",
+          "isHidden": true,
+          "isKey": false,
+          "formatString": "0.00",
+          "description": "Gap Hours. See README for definitions."
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "name": "Failures to Machines",
+      "fromTable": "Failures",
+      "fromColumn": "Machine ID",
+      "toTable": "Machines",
+      "toColumn": "Machine ID",
+      "fromCardinality": "Many",
+      "toCardinality": "One",
+      "crossFilteringBehavior": "OneDirection",
+      "isActive": true
+    },
+    {
+      "name": "Failures to Dates",
+      "fromTable": "Failures",
+      "fromColumn": "Date",
+      "toTable": "Dates",
+      "toColumn": "Date",
+      "fromCardinality": "Many",
+      "toCardinality": "One",
+      "crossFilteringBehavior": "OneDirection",
+      "isActive": true
+    },
+    {
+      "name": "Failures to Components",
+      "fromTable": "Failures",
+      "fromColumn": "Component",
+      "toTable": "Components",
+      "toColumn": "Component",
+      "fromCardinality": "Many",
+      "toCardinality": "One",
+      "crossFilteringBehavior": "OneDirection",
+      "isActive": true
+    },
+    {
+      "name": "Errors to Machines",
+      "fromTable": "Errors",
+      "fromColumn": "Machine ID",
+      "toTable": "Machines",
+      "toColumn": "Machine ID",
+      "fromCardinality": "Many",
+      "toCardinality": "One",
+      "crossFilteringBehavior": "OneDirection",
+      "isActive": true
+    },
+    {
+      "name": "Errors to Dates",
+      "fromTable": "Errors",
+      "fromColumn": "Date",
+      "toTable": "Dates",
+      "toColumn": "Date",
+      "fromCardinality": "Many",
+      "toCardinality": "One",
+      "crossFilteringBehavior": "OneDirection",
+      "isActive": true
+    },
+    {
+      "name": "Maintenance to Machines",
+      "fromTable": "Maintenance",
+      "fromColumn": "Machine ID",
+      "toTable": "Machines",
+      "toColumn": "Machine ID",
+      "fromCardinality": "Many",
+      "toCardinality": "One",
+      "crossFilteringBehavior": "OneDirection",
+      "isActive": true
+    },
+    {
+      "name": "Maintenance to Dates",
+      "fromTable": "Maintenance",
+      "fromColumn": "Date",
+      "toTable": "Dates",
+      "toColumn": "Date",
+      "fromCardinality": "Many",
+      "toCardinality": "One",
+      "crossFilteringBehavior": "OneDirection",
+      "isActive": true
+    },
+    {
+      "name": "Maintenance to Components",
+      "fromTable": "Maintenance",
+      "fromColumn": "Component",
+      "toTable": "Components",
+      "toColumn": "Component",
+      "fromCardinality": "Many",
+      "toCardinality": "One",
+      "crossFilteringBehavior": "OneDirection",
+      "isActive": true
+    },
+    {
+      "name": "Daily Health to Machines",
+      "fromTable": "Daily Health",
+      "fromColumn": "Machine ID",
+      "toTable": "Machines",
+      "toColumn": "Machine ID",
+      "fromCardinality": "Many",
+      "toCardinality": "One",
+      "crossFilteringBehavior": "OneDirection",
+      "isActive": true
+    },
+    {
+      "name": "Daily Health to Dates",
+      "fromTable": "Daily Health",
+      "fromColumn": "Date",
+      "toTable": "Dates",
+      "toColumn": "Date",
+      "fromCardinality": "Many",
+      "toCardinality": "One",
+      "crossFilteringBehavior": "OneDirection",
+      "isActive": true
+    },
+    {
+      "name": "Sensor Daily to Machines",
+      "fromTable": "Sensor Daily",
+      "fromColumn": "Machine ID",
+      "toTable": "Machines",
+      "toColumn": "Machine ID",
+      "fromCardinality": "Many",
+      "toCardinality": "One",
+      "crossFilteringBehavior": "OneDirection",
+      "isActive": true
+    },
+    {
+      "name": "Sensor Daily to Dates",
+      "fromTable": "Sensor Daily",
+      "fromColumn": "Date",
+      "toTable": "Dates",
+      "toColumn": "Date",
+      "fromCardinality": "Many",
+      "toCardinality": "One",
+      "crossFilteringBehavior": "OneDirection",
+      "isActive": true
+    },
+    {
+      "name": "Sensor Daily to Sensors",
+      "fromTable": "Sensor Daily",
+      "fromColumn": "Sensor",
+      "toTable": "Sensors",
+      "toColumn": "Sensor",
+      "fromCardinality": "Many",
+      "toCardinality": "One",
+      "crossFilteringBehavior": "OneDirection",
+      "isActive": true
+    },
+    {
+      "name": "Failure Windows to Machines",
+      "fromTable": "Failure Windows",
+      "fromColumn": "Machine ID",
+      "toTable": "Machines",
+      "toColumn": "Machine ID",
+      "fromCardinality": "Many",
+      "toCardinality": "One",
+      "crossFilteringBehavior": "OneDirection",
+      "isActive": true
+    },
+    {
+      "name": "Failure Windows to Dates",
+      "fromTable": "Failure Windows",
+      "fromColumn": "Date",
+      "toTable": "Dates",
+      "toColumn": "Date",
+      "fromCardinality": "Many",
+      "toCardinality": "One",
+      "crossFilteringBehavior": "OneDirection",
+      "isActive": true
+    },
+    {
+      "name": "Failure Windows to Components",
+      "fromTable": "Failure Windows",
+      "fromColumn": "Component",
+      "toTable": "Components",
+      "toColumn": "Component",
+      "fromCardinality": "Many",
+      "toCardinality": "One",
+      "crossFilteringBehavior": "OneDirection",
+      "isActive": true
+    },
+    {
+      "name": "Failure Windows to Sensors",
+      "fromTable": "Failure Windows",
+      "fromColumn": "Sensor",
+      "toTable": "Sensors",
+      "toColumn": "Sensor",
+      "fromCardinality": "Many",
+      "toCardinality": "One",
+      "crossFilteringBehavior": "OneDirection",
+      "isActive": true
+    },
+    {
+      "name": "Failure Intervals to Machines",
+      "fromTable": "Failure Intervals",
+      "fromColumn": "Machine ID",
+      "toTable": "Machines",
+      "toColumn": "Machine ID",
+      "fromCardinality": "Many",
+      "toCardinality": "One",
+      "crossFilteringBehavior": "OneDirection",
+      "isActive": true
+    },
+    {
+      "name": "Failure Intervals to Dates",
+      "fromTable": "Failure Intervals",
+      "fromColumn": "Date",
+      "toTable": "Dates",
+      "toColumn": "Date",
+      "fromCardinality": "Many",
+      "toCardinality": "One",
+      "crossFilteringBehavior": "OneDirection",
+      "isActive": true
+    }
+  ],
+  "measures": [
+    {
+      "tableName": "Failures",
+      "name": "Failure Events",
+      "expression": "COALESCE(COUNTROWS('Failures'), 0)",
+      "description": "Component failure records in selected period. Simultaneous component failures count separately.",
+      "formatString": "#,##0",
+      "displayFolder": "Reliability"
+    },
+    {
+      "tableName": "Failures",
+      "name": "Machines With Failures",
+      "expression": "COALESCE(DISTINCTCOUNT('Failures'[Machine ID]), 0)",
+      "description": "Distinct machines with at least one failure record in selected period; not failure event count.",
+      "formatString": "#,##0",
+      "displayFolder": "Reliability"
+    },
+    {
+      "tableName": "Errors",
+      "name": "Error Events",
+      "expression": "COALESCE(COUNTROWS('Errors'), 0)",
+      "description": "Non-breaking error records in selected period.",
+      "formatString": "#,##0",
+      "displayFolder": "Reliability"
+    },
+    {
+      "tableName": "Maintenance",
+      "name": "Replacement Records",
+      "expression": "COALESCE(COUNTROWS('Maintenance'), 0)",
+      "description": "Component replacement records including replacements related to failure. Do not add this to failures as unique incidents.",
+      "formatString": "#,##0",
+      "displayFolder": "Reliability"
+    },
+    {
+      "tableName": "Daily Health",
+      "name": "Observed Telemetry Hours",
+      "expression": "SUM('Daily Health'[Reading Count])",
+      "description": "One timestamped hourly sample is one observed telemetry hour; not proof of productive uptime.",
+      "formatString": "#,##0",
+      "displayFolder": "Reliability"
+    },
+    {
+      "tableName": "Daily Health",
+      "name": "Observed Machines",
+      "expression": "DISTINCTCOUNT('Daily Health'[Machine ID])",
+      "description": "Distinct machines with telemetry in selected period.",
+      "formatString": "#,##0",
+      "displayFolder": "Reliability"
+    },
+    {
+      "tableName": "Failures",
+      "name": "Failures per 1000 Observed Hours",
+      "expression": "DIVIDE([Failure Events] * 1000, [Observed Telemetry Hours])",
+      "description": "Numerator: component failure records in date/machine selection. Denominator: hourly telemetry samples in same selection. Multiplied by 1000. Component filters apply to numerator only.",
+      "formatString": "0.000",
+      "displayFolder": "Reliability"
+    },
+    {
+      "tableName": "Failures",
+      "name": "Component Cumulative Share",
+      "expression": "VAR _n = [Failure Events]\nVAR _components = ADDCOLUMNS(ALLSELECTED('Components'[Component]), \"Events\", [Failure Events])\nRETURN DIVIDE(SUMX(FILTER(_components, [Events] >= _n), [Events]), CALCULATE([Failure Events], ALLSELECTED('Components'[Component])))",
+      "description": "Pareto cumulative fraction by descending component failure count; ties share a position.",
+      "formatString": "0.0%",
+      "displayFolder": "Reliability"
+    },
+    {
+      "tableName": "Failures",
+      "name": "Plant Insight",
+      "expression": "VAR _n = [Failure Events]\nVAR _top = TOPN(1, ADDCOLUMNS(ALLSELECTED('Components'[Component]), \"Events\", [Failure Events]), [Events], DESC, 'Components'[Component], ASC)\nRETURN FORMAT(_n,\"#,##0\") & \" component failure events; \" & FORMAT([Machines With Failures],\"0\") & \" machines with records. \" & IF(_n=0,\"No failures in selected scope.\",CONCATENATEX(_top,'Components'[Component] & \" leads (\" & FORMAT([Events],\"0\") & \" events).\"))",
+      "description": "Dynamic count and leading component for current report filters.",
+      "formatString": "General",
+      "displayFolder": "Context"
+    },
+    {
+      "tableName": "Failure Intervals",
+      "name": "Mean Completed Failure Gap Hours",
+      "expression": "VAR _start = MIN('Dates'[Date])\nRETURN CALCULATE(AVERAGE('Failure Intervals'[Gap Hours]), KEEPFILTERS('Failure Intervals'[Previous Failure] >= _start))",
+      "description": "Mean observed gap between distinct machine failure timestamps, both inside selected continuous period. Not MTBF: censored first/last intervals and operating exposure unavailable.",
+      "formatString": "0.0",
+      "displayFolder": "Reliability"
+    },
+    {
+      "tableName": "Failure Intervals",
+      "name": "Completed Gap Sample",
+      "expression": "VAR _start = MIN('Dates'[Date])\nRETURN CALCULATE(COUNTROWS('Failure Intervals'), KEEPFILTERS('Failure Intervals'[Previous Failure] >= _start))",
+      "description": "Number of completed gaps contributing to mean; simultaneous components at one timestamp collapse only for this calculation.",
+      "formatString": "#,##0",
+      "displayFolder": "Reliability"
+    },
+    {
+      "tableName": "Sensor Daily",
+      "name": "Sensor Daily Mean",
+      "expression": "AVERAGE('Sensor Daily'[Mean Reading])",
+      "description": "Daily sensor average; use one sensor at a time. Reference excludes current day and requires 7 previous daily means.",
+      "formatString": "0.00",
+      "displayFolder": "Sensors"
+    },
+    {
+      "tableName": "Sensor Daily",
+      "name": "Prior 30 Day Mean",
+      "expression": "AVERAGE('Sensor Daily'[Prior Mean])",
+      "description": "Daily sensor average; use one sensor at a time. Reference excludes current day and requires 7 previous daily means.",
+      "formatString": "0.00",
+      "displayFolder": "Sensors"
+    },
+    {
+      "tableName": "Sensor Daily",
+      "name": "Sensor Deviation Z",
+      "expression": "AVERAGE('Sensor Daily'[Deviation Z])",
+      "description": "Daily sensor average; use one sensor at a time. Reference excludes current day and requires 7 previous daily means.",
+      "formatString": "0.00",
+      "displayFolder": "Sensors"
+    },
+    {
+      "tableName": "Failure Windows",
+      "name": "Failure Window Mean",
+      "expression": "CALCULATE(AVERAGE('Failure Windows'[Mean Reading]), 'Failure Windows'[Complete Bin] = 1)",
+      "description": "Mean of full 24-hour event-relative bins; equal component-event weighting. Descriptive association, not causal.",
+      "formatString": "0.00",
+      "displayFolder": "Failure Windows"
+    },
+    {
+      "tableName": "Failure Windows",
+      "name": "Window Event Sample",
+      "expression": "CALCULATE(DISTINCTCOUNT('Failure Windows'[Event ID]), 'Failure Windows'[Complete Bin] = 1)",
+      "description": "Distinct component failure records contributing to full 24-hour bins in selected relative day and sensor.",
+      "formatString": "#,##0",
+      "displayFolder": "Failure Windows"
+    },
+    {
+      "tableName": "Failure Windows",
+      "name": "Window Hour Sample",
+      "expression": "CALCULATE(SUM('Failure Windows'[Sample Hours]), 'Failure Windows'[Complete Bin] = 1)",
+      "description": "Sum of event-relative sample hours; overlapping windows reuse telemetry and are not independent observations.",
+      "formatString": "#,##0",
+      "displayFolder": "Failure Windows"
+    },
+    {
+      "tableName": "Daily Health",
+      "name": "As Of Date",
+      "expression": "VAR _selected = MAX('Dates'[Date])\nVAR _last = CALCULATE(MAX('Daily Health'[Date]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] <= _selected)\nRETURN _last",
+      "description": "Latest available daily snapshot no later than maximum selected date; historical end-of-day convention.",
+      "formatString": "yyyy-MM-dd",
+      "displayFolder": "Priority"
+    },
+    {
+      "tableName": "Daily Health",
+      "name": "Priority Score",
+      "expression": "VAR _asOf = [As Of Date]\nRETURN IF(NOT ISBLANK(_asOf), CALCULATE(MAX('Daily Health'[Recorded Priority Score]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf))",
+      "description": "Latest selected as-of snapshot. For scores and reasons select an individual machine or use the ranking table.",
+      "formatString": "0.0",
+      "displayFolder": "Priority"
+    },
+    {
+      "tableName": "Daily Health",
+      "name": "Recent Failures 14 Days",
+      "expression": "VAR _asOf = [As Of Date]\nRETURN IF(NOT ISBLANK(_asOf), CALCULATE(MAX('Daily Health'[Failures 14 Days]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf))",
+      "description": "Latest selected as-of snapshot. For scores and reasons select an individual machine or use the ranking table.",
+      "formatString": "0",
+      "displayFolder": "Priority"
+    },
+    {
+      "tableName": "Daily Health",
+      "name": "Recent Errors 7 Days",
+      "expression": "VAR _asOf = [As Of Date]\nRETURN IF(NOT ISBLANK(_asOf), CALCULATE(MAX('Daily Health'[Errors 7 Days]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf))",
+      "description": "Latest selected as-of snapshot. For scores and reasons select an individual machine or use the ranking table.",
+      "formatString": "0",
+      "displayFolder": "Priority"
+    },
+    {
+      "tableName": "Daily Health",
+      "name": "Maximum Sensor Deviation",
+      "expression": "VAR _asOf = [As Of Date]\nRETURN IF(NOT ISBLANK(_asOf), CALCULATE(MAX('Daily Health'[Sensor Deviation Max]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf))",
+      "description": "Latest selected as-of snapshot. For scores and reasons select an individual machine or use the ranking table.",
+      "formatString": "0.00",
+      "displayFolder": "Priority"
+    },
+    {
+      "tableName": "Daily Health",
+      "name": "Oldest Component Replacement Days",
+      "expression": "VAR _asOf = [As Of Date]\nRETURN IF(NOT ISBLANK(_asOf), CALCULATE(MAX('Daily Health'[Oldest Component Days]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf))",
+      "description": "Latest selected as-of snapshot. For scores and reasons select an individual machine or use the ranking table.",
+      "formatString": "0",
+      "displayFolder": "Priority"
+    },
+    {
+      "tableName": "Daily Health",
+      "name": "Failure Score Points",
+      "expression": "VAR _asOf = [As Of Date]\nRETURN IF(NOT ISBLANK(_asOf), CALCULATE(MAX('Daily Health'[Failure Points]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf))",
+      "description": "Latest selected as-of snapshot. For scores and reasons select an individual machine or use the ranking table.",
+      "formatString": "0",
+      "displayFolder": "Priority"
+    },
+    {
+      "tableName": "Daily Health",
+      "name": "Error Score Points",
+      "expression": "VAR _asOf = [As Of Date]\nRETURN IF(NOT ISBLANK(_asOf), CALCULATE(MAX('Daily Health'[Error Points]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf))",
+      "description": "Latest selected as-of snapshot. For scores and reasons select an individual machine or use the ranking table.",
+      "formatString": "0",
+      "displayFolder": "Priority"
+    },
+    {
+      "tableName": "Daily Health",
+      "name": "Sensor Score Points",
+      "expression": "VAR _asOf = [As Of Date]\nRETURN IF(NOT ISBLANK(_asOf), CALCULATE(MAX('Daily Health'[Sensor Points]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf))",
+      "description": "Latest selected as-of snapshot. For scores and reasons select an individual machine or use the ranking table.",
+      "formatString": "0.0",
+      "displayFolder": "Priority"
+    },
+    {
+      "tableName": "Daily Health",
+      "name": "Maintenance Score Points",
+      "expression": "VAR _asOf = [As Of Date]\nRETURN IF(NOT ISBLANK(_asOf), CALCULATE(MAX('Daily Health'[Maintenance Points]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf))",
+      "description": "Latest selected as-of snapshot. For scores and reasons select an individual machine or use the ranking table.",
+      "formatString": "0",
+      "displayFolder": "Priority"
+    },
+    {
+      "tableName": "Daily Health",
+      "name": "Baseline Sensor Count",
+      "expression": "VAR _asOf = [As Of Date]\nRETURN IF(NOT ISBLANK(_asOf), CALCULATE(MAX('Daily Health'[Baseline Sensors]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf))",
+      "description": "Latest selected as-of snapshot. For scores and reasons select an individual machine or use the ranking table.",
+      "formatString": "0",
+      "displayFolder": "Priority"
+    },
+    {
+      "tableName": "Daily Health",
+      "name": "Component History Count",
+      "expression": "VAR _asOf = [As Of Date]\nRETURN IF(NOT ISBLANK(_asOf), CALCULATE(MAX('Daily Health'[Components With History]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf))",
+      "description": "Latest selected as-of snapshot. For scores and reasons select an individual machine or use the ranking table.",
+      "formatString": "0",
+      "displayFolder": "Priority"
+    },
+    {
+      "tableName": "Daily Health",
+      "name": "Priority Reasons",
+      "expression": "VAR _asOf = [As Of Date]\nRETURN IF(HASONEVALUE('Machines'[Machine ID]), CALCULATE(SELECTEDVALUE('Daily Health'[Recorded Priority Reasons]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf), \"Select one machine\")",
+      "description": "Rule-based prioritization, not probability; analytical recommendations requiring engineering review.",
+      "formatString": "General",
+      "displayFolder": "Priority"
+    },
+    {
+      "tableName": "Daily Health",
+      "name": "Suggested Inspection",
+      "expression": "VAR _asOf = [As Of Date]\nRETURN IF(HASONEVALUE('Machines'[Machine ID]), CALCULATE(SELECTEDVALUE('Daily Health'[Recorded Suggested Inspection]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf), \"Select one machine\")",
+      "description": "Rule-based prioritization, not probability; analytical recommendations requiring engineering review.",
+      "formatString": "General",
+      "displayFolder": "Priority"
+    },
+    {
+      "tableName": "Daily Health",
+      "name": "Priority Status",
+      "expression": "VAR _asOf = [As Of Date]\nRETURN IF(HASONEVALUE('Machines'[Machine ID]), CALCULATE(SELECTEDVALUE('Daily Health'[Priority Band]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf), \"Select one machine\")",
+      "description": "Rule-based prioritization, not probability; analytical recommendations requiring engineering review.",
+      "formatString": "General",
+      "displayFolder": "Priority"
+    },
+    {
+      "tableName": "Daily Health",
+      "name": "Priority Rank",
+      "expression": "IF(HASONEVALUE('Machines'[Machine ID]), RANKX(ALLSELECTED('Machines'), [Priority Score], , DESC, Dense))",
+      "description": "Dense rank within model/machine selection at the selected end date.",
+      "formatString": "0",
+      "displayFolder": "Priority"
+    },
+    {
+      "tableName": "Daily Health",
+      "name": "High Priority Machines",
+      "expression": "SUMX(VALUES('Machines'[Machine ID]), IF([Priority Score] >= 60, 1, 0))",
+      "description": "Count of machines at rule-based score >=60 as of selected date.",
+      "formatString": "0",
+      "displayFolder": "Priority"
+    },
+    {
+      "tableName": "Daily Health",
+      "name": "Watch Priority Machines",
+      "expression": "SUMX(VALUES('Machines'[Machine ID]), IF([Priority Score] >= 30 && [Priority Score] < 60, 1, 0))",
+      "description": "Count at 30<=score<60 as of selected date.",
+      "formatString": "0",
+      "displayFolder": "Priority"
+    },
+    {
+      "tableName": "Daily Health",
+      "name": "Latest Observed Timestamp",
+      "expression": "VAR _asOf = [As Of Date]\nRETURN CALCULATE(MAX('Daily Health'[Latest Timestamp]), REMOVEFILTERS('Dates'), 'Daily Health'[Date] = _asOf)",
+      "description": "Latest telemetry actually observed at selected snapshot. No live feed.",
+      "formatString": "yyyy-MM-dd HH:mm",
+      "displayFolder": "Context"
+    },
+    {
+      "tableName": "Machines",
+      "name": "Machine Context",
+      "expression": "SELECTEDVALUE('Machines'[Machine], \"Select one machine\") & \" | \" & SELECTEDVALUE('Machines'[Model], \"multiple models\") & \" | recorded age \" & FORMAT(SELECTEDVALUE('Machines'[Age Years]), \"0\") & \" years\"",
+      "description": "Static recorded machine age; does not automatically age through history.",
+      "formatString": "General",
+      "displayFolder": "Context"
+    },
+    {
+      "tableName": "Failures",
+      "name": "Machine History Note",
+      "expression": "IF([Failure Events]=0,\"No recorded failure in this period. \",FORMAT([Failure Events],\"0\") & \" component failure records. \") & IF([Replacement Records]=0,\"No replacement record in this period; earlier history may exist.\",FORMAT([Replacement Records],\"0\") & \" component replacements in this period.\")",
+      "description": "Separates absence of records from evidence of perfect health.",
+      "formatString": "General",
+      "displayFolder": "Context"
+    },
+    {
+      "tableName": "Failures",
+      "name": "Top Machine Failure Events",
+      "expression": "VAR _rank = RANKX(ALLSELECTED('Machines'), [Failure Events], , DESC, Dense)\nRETURN IF(_rank <= 10, [Failure Events])",
+      "description": "Top 10 dense ranks; ties retained.",
+      "formatString": "#,##0",
+      "displayFolder": "Reliability"
+    },
+    {
+      "tableName": "Daily Health",
+      "name": "Priority Date Label",
+      "expression": "\"As of \" & FORMAT([As Of Date], \"dd MMM yyyy\") & \" | rule-based score, not ML probability\"",
+      "description": "Historical cutoff and score meaning.",
+      "formatString": "General",
+      "displayFolder": "Priority"
+    },
+    {
+      "tableName": "Sensor Daily",
+      "name": "Sensor Context",
+      "expression": "SELECTEDVALUE('Sensors'[Sensor], \"Select one sensor\") & \" | source sample units (physical units unspecified)\"",
+      "description": "Sensor identity and unit limitation.",
+      "formatString": "General",
+      "displayFolder": "Sensors"
+    }
+  ]
+}

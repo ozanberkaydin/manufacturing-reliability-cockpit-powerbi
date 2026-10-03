@@ -1,0 +1,52 @@
+/// One row per timestamp, machine, error code; non-breaking errors.
+table Errors
+	lineageTag: e239ee41-2fba-44a2-a8dc-21957a013f1a
+
+	/// Non-breaking error records in selected period.
+	measure 'Error Events' = COALESCE(COUNTROWS('Errors'), 0)
+		formatString: #,##0
+		displayFolder: Reliability
+		lineageTag: c61981d9-69b4-4368-b2bd-2c762bc5e0ee
+
+	/// Hourly timestamp of the error record.
+	column Timestamp
+		dataType: dateTime
+		isHidden
+		lineageTag: 4fca7503-91a3-4e6a-9f39-42c93d8529ef
+		summarizeBy: none
+		sourceColumn: Timestamp
+
+	/// One row per timestamp, machine, error code; non-breaking errors.
+	column 'Machine ID'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 15f9c4c1-657e-4ff6-a4f4-0fdb95b0bac5
+		summarizeBy: none
+		sourceColumn: Machine ID
+
+	/// Error code (error1-error5); non-breaking errors.
+	column Error
+		dataType: string
+		lineageTag: 7fa3b26a-7355-4d6a-a55f-2db397cfe28d
+		summarizeBy: none
+		sourceColumn: Error
+
+	/// One row per timestamp, machine, error code; non-breaking errors.
+	column Date
+		dataType: dateTime
+		formatString: yyyy-MM-dd
+		lineageTag: aa24f516-65e2-4007-8261-01a3fc2485c4
+		summarizeBy: none
+		sourceColumn: Date
+
+	partition Errors = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(#"Data Folder" & "/errors.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"Timestamp", type datetime}, {"Machine ID", Int64.Type}, {"Error", type text}, {"Date", type datetime}}, "en-US")
+				in
+				    Typed
+

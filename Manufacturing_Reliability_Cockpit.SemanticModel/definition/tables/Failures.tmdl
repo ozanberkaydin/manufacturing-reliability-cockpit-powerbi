@@ -1,0 +1,96 @@
+/// One row per timestamp, machine, component failure/replacement record; simultaneous components preserved.
+table Failures
+	lineageTag: c1e4f04d-40de-4a71-af9d-d47a29d8157c
+
+	/// Component failure records in selected period. Simultaneous component failures count separately.
+	measure 'Failure Events' = COALESCE(COUNTROWS('Failures'), 0)
+		formatString: #,##0
+		displayFolder: Reliability
+		lineageTag: 31696c16-a14a-40e3-af10-d05cf1dd22b0
+
+	/// Distinct machines with at least one failure record in selected period; not failure event count.
+	measure 'Machines With Failures' = COALESCE(DISTINCTCOUNT('Failures'[Machine ID]), 0)
+		formatString: #,##0
+		displayFolder: Reliability
+		lineageTag: 915069f5-f247-4077-932e-cff0e71638b4
+
+	/// Numerator: component failure records in date/machine selection. Denominator: hourly telemetry samples in same selection. Multiplied by 1000. Component filters apply to numerator only.
+	measure 'Failures per 1000 Observed Hours' = DIVIDE([Failure Events] * 1000, [Observed Telemetry Hours])
+		formatString: 0.000
+		displayFolder: Reliability
+		lineageTag: a458eef1-8ec2-4205-83d6-b98a764c8598
+
+	/// Pareto cumulative fraction by descending component failure count; ties share a position.
+	measure 'Component Cumulative Share' =
+			VAR _n = [Failure Events]
+			VAR _components = ADDCOLUMNS(ALLSELECTED('Components'[Component]), "Events", [Failure Events])
+			RETURN DIVIDE(SUMX(FILTER(_components, [Events] >= _n), [Events]), CALCULATE([Failure Events], ALLSELECTED('Components'[Component])))
+		formatString: 0.0%
+		displayFolder: Reliability
+		lineageTag: ef4327ff-d5d5-4690-9075-8e0998ce33b9
+
+	/// Dynamic count and leading component for current report filters.
+	measure 'Plant Insight' =
+			VAR _n = [Failure Events]
+			VAR _top = TOPN(1, ADDCOLUMNS(ALLSELECTED('Components'[Component]), "Events", [Failure Events]), [Events], DESC, 'Components'[Component], ASC)
+			RETURN FORMAT(_n,"#,##0") & " component failure events; " & FORMAT([Machines With Failures],"0") & " machines with records. " & IF(_n=0,"No failures in selected scope.",CONCATENATEX(_top,'Components'[Component] & " leads (" & FORMAT([Events],"0") & " events)."))
+		formatString: General
+		displayFolder: Context
+		lineageTag: 8cbc91b3-991a-43dd-b229-f7ed438a2c1b
+
+	/// Separates absence of records from evidence of perfect health.
+	measure 'Machine History Note' = IF([Failure Events]=0,"No recorded failure in this period. ",FORMAT([Failure Events],"0") & " component failure records. ") & IF([Replacement Records]=0,"No replacement record in this period; earlier history may exist.",FORMAT([Replacement Records],"0") & " component replacements in this period.")
+		formatString: General
+		displayFolder: Context
+		lineageTag: 408bdc34-3959-4d96-9076-d447985c8f75
+
+	/// Top 10 dense ranks of machines by component failure count in current period; ties retained.
+	measure 'Top Machine Failure Events' =
+			VAR _rank = RANKX(ALLSELECTED('Machines'), [Failure Events], , DESC, Dense)
+			RETURN IF(_rank <= 10, [Failure Events])
+		formatString: #,##0
+		displayFolder: Reliability
+		lineageTag: a289522a-336f-44b9-83f3-7bcbfd2a4f24
+
+	/// Hourly timestamp of the component failure record.
+	column Timestamp
+		dataType: dateTime
+		isHidden
+		lineageTag: e7958f59-964e-4ae3-8211-324068c1762f
+		summarizeBy: none
+		sourceColumn: Timestamp
+
+	/// One row per timestamp, machine, component failure/replacement record; simultaneous components preserved.
+	column 'Machine ID'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: bc4d0356-33b7-45de-ab75-11cdfb6c586f
+		summarizeBy: none
+		sourceColumn: Machine ID
+
+	/// Failed component code; one row per component when several fail together.
+	column Component
+		dataType: string
+		lineageTag: 79e86871-d60b-4149-9ac3-e4b68c954488
+		summarizeBy: none
+		sourceColumn: Component
+
+	/// One row per timestamp, machine, component failure/replacement record; simultaneous components preserved.
+	column Date
+		dataType: dateTime
+		formatString: yyyy-MM-dd
+		lineageTag: d99c4fa1-9a3e-48ff-af34-c6f07f8c65a7
+		summarizeBy: none
+		sourceColumn: Date
+
+	partition Failures = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(#"Data Folder" & "/failures.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"Timestamp", type datetime}, {"Machine ID", Int64.Type}, {"Component", type text}, {"Date", type datetime}}, "en-US")
+				in
+				    Typed
+

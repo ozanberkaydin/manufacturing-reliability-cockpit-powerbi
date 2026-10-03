@@ -1,0 +1,66 @@
+/// One row per calendar day; covers maintenance history and telemetry.
+table Dates
+	lineageTag: 63d65280-722f-4728-9854-e5899a438367
+	dataCategory: Time
+
+	/// One row per calendar day; covers maintenance history and telemetry.
+	column Date
+		dataType: dateTime
+		isUnique
+		isKey
+		formatString: yyyy-MM-dd
+		lineageTag: e73b7bfd-434d-4694-b4c0-1439c5160e86
+		summarizeBy: none
+		sourceColumn: Date
+
+	/// Calendar year.
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: b3daa79a-88ba-4824-869b-fc89e297e360
+		summarizeBy: none
+		sourceColumn: Year
+
+	/// Month label; sorted by Month Number.
+	column Month
+		dataType: string
+		sortByColumn: 'Month Number'
+		lineageTag: 8cb87cba-ccee-4d43-a708-06cf90135f6f
+		summarizeBy: none
+		sourceColumn: Month
+
+	/// Calendar month number 1-12; sort key for Month.
+	column 'Month Number'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 30f7549b-a6ab-4dbe-9201-5750fbc85090
+		summarizeBy: none
+		sourceColumn: Month Number
+
+	/// Calendar quarter label.
+	column Quarter
+		dataType: string
+		lineageTag: d9ea7952-5b89-4da0-b97a-6f72114b8de7
+		summarizeBy: none
+		sourceColumn: Quarter
+
+	/// 1 when the date falls inside the hourly telemetry coverage, otherwise 0.
+	column 'In Telemetry Period'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: db784a5e-4d7b-442b-8702-cc0028de64a8
+		summarizeBy: none
+		sourceColumn: In Telemetry Period
+
+	partition Dates = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(#"Data Folder" & "/dates.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"Date", type datetime}, {"Year", Int64.Type}, {"Month", type text}, {"Month Number", Int64.Type}, {"Quarter", type text}, {"In Telemetry Period", Int64.Type}}, "en-US")
+				in
+				    Typed
+

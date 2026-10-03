@@ -1,0 +1,72 @@
+/// One row per completed gap between distinct consecutive machine failure timestamps. Date is ending event date.
+table 'Failure Intervals'
+	lineageTag: c59572ff-b467-4b74-8721-d3bf684cc631
+
+	/// Mean observed gap between distinct machine failure timestamps, both inside selected continuous period. Not MTBF: censored first/last intervals and operating exposure unavailable.
+	measure 'Mean Completed Failure Gap Hours' =
+			VAR _start = MIN('Dates'[Date])
+			RETURN CALCULATE(AVERAGE('Failure Intervals'[Gap Hours]), KEEPFILTERS('Failure Intervals'[Previous Failure] >= _start))
+		formatString: 0.0
+		displayFolder: Reliability
+		lineageTag: 7afcee64-23d4-478d-bb73-559907d46dd2
+
+	/// Number of completed gaps contributing to mean; simultaneous components at one timestamp collapse only for this calculation.
+	measure 'Completed Gap Sample' =
+			VAR _start = MIN('Dates'[Date])
+			RETURN CALCULATE(COUNTROWS('Failure Intervals'), KEEPFILTERS('Failure Intervals'[Previous Failure] >= _start))
+		formatString: #,##0
+		displayFolder: Reliability
+		lineageTag: 5f74ca67-4e49-4126-9b65-ac97edb740d3
+
+	/// One row per completed gap between distinct consecutive machine failure timestamps. Date is ending event date.
+	column 'Machine ID'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 69e7d381-5ebe-4def-b6af-ed171a8eae99
+		summarizeBy: none
+		sourceColumn: Machine ID
+
+	/// Timestamp of the failure that closes the interval.
+	column Timestamp
+		dataType: dateTime
+		isHidden
+		lineageTag: 2a847b26-7d0c-4a12-9fa1-969e3c60e817
+		summarizeBy: none
+		sourceColumn: Timestamp
+
+	/// One row per completed gap between distinct consecutive machine failure timestamps. Date is ending event date.
+	column Date
+		dataType: dateTime
+		formatString: yyyy-MM-dd
+		lineageTag: 63e19389-4d99-454a-be12-223d1a1cd019
+		summarizeBy: none
+		sourceColumn: Date
+
+	/// Timestamp of the preceding distinct failure on the same machine.
+	column 'Previous Failure'
+		dataType: dateTime
+		isHidden
+		lineageTag: 31803f78-ca03-493e-98ac-3c6a21aa55fc
+		summarizeBy: none
+		sourceColumn: Previous Failure
+
+	/// Hours between Previous Failure and Timestamp.
+	column 'Gap Hours'
+		dataType: decimal
+		isHidden
+		formatString: 0.00
+		lineageTag: 69c2d6cf-c436-4f21-9044-5b1856eb8e16
+		summarizeBy: none
+		sourceColumn: Gap Hours
+
+	partition 'Failure Intervals' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(#"Data Folder" & "/failure_intervals.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"Machine ID", Int64.Type}, {"Timestamp", type datetime}, {"Date", type datetime}, {"Previous Failure", type datetime}, {"Gap Hours", type number}}, "en-US")
+				in
+				    Typed
+

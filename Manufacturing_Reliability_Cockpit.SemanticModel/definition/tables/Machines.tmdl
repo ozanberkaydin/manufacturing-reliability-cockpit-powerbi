@@ -1,0 +1,61 @@
+/// One row per machine; static model and recorded age in years.
+table Machines
+	lineageTag: 6067bdd7-4e8a-4bc4-b305-d52b344fb9a5
+
+	/// Static recorded machine age; does not automatically age through history.
+	measure 'Machine Context' =
+			VAR _age = SELECTEDVALUE('Machines'[Age Years])
+			RETURN SELECTEDVALUE('Machines'[Machine], "Select one machine") & " | " & SELECTEDVALUE('Machines'[Model], "multiple models") & IF(NOT ISBLANK(_age), " | recorded age " & FORMAT(_age, "0") & " years")
+		formatString: General
+		displayFolder: Context
+		lineageTag: 2fe831dc-c40c-4784-8bfc-4a598229c703
+
+	/// One row per machine; static model and recorded age in years.
+	column 'Machine ID'
+		dataType: int64
+		isHidden
+		isKey
+		formatString: 0
+		lineageTag: 1f4802dd-f98e-4f06-8174-47ed126cae96
+		summarizeBy: none
+		sourceColumn: Machine ID
+
+	/// Machine model as recorded in the source (model1-model4).
+	column Model
+		dataType: string
+		lineageTag: bd896fd7-1c13-459d-96cd-367e7a64077e
+		summarizeBy: none
+		sourceColumn: Model
+
+	/// Recorded machine age in whole years; static, not aged through history.
+	column 'Age Years'
+		dataType: int64
+		formatString: 0
+		lineageTag: 19a08c0c-0c31-467f-bf5f-3806f15390b4
+		summarizeBy: none
+		sourceColumn: Age Years
+
+	/// Display label for the machine (e.g. Machine 001).
+	column Machine
+		dataType: string
+		lineageTag: 95169c24-5cb1-410f-9acb-fb96fd86e471
+		summarizeBy: none
+		sourceColumn: Machine
+
+	/// Grouping of Age Years used for cohort comparison.
+	column 'Age Band'
+		dataType: string
+		lineageTag: 695de5c0-0d9f-4121-b07f-2626686dcf80
+		summarizeBy: none
+		sourceColumn: Age Band
+
+	partition Machines = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(#"Data Folder" & "/machines.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"Machine ID", Int64.Type}, {"Model", type text}, {"Age Years", Int64.Type}, {"Machine", type text}, {"Age Band", type text}}, "en-US")
+				in
+				    Typed
+

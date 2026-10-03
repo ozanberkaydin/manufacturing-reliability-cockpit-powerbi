@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Manufacturing Reliability & Maintenance Cockpit"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "89d2d6cc-676a-4f00-a681-f65f07e7827a"
+  }
+}

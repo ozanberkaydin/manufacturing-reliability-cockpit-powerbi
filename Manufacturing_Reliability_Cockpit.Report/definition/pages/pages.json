@@ -1,0 +1,10 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/pagesMetadata/1.1.0/schema.json",
+  "pageOrder": [
+    "plant_overview",
+    "machine_health",
+    "failure_analysis",
+    "maintenance_priorities"
+  ],
+  "activePageName": "plant_overview"
+}

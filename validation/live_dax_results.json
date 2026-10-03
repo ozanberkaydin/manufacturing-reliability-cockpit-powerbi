@@ -1,0 +1,667 @@
+[
+  {
+    "case": "full",
+    "rowCount": 1,
+    "isTruncated": false,
+    "columns": [
+      {
+        "name": "[Failures]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 0
+      },
+      {
+        "name": "[Machines]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 1
+      },
+      {
+        "name": "[Errors]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 2
+      },
+      {
+        "name": "[Replacements]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 3
+      },
+      {
+        "name": "[Hours]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 4
+      },
+      {
+        "name": "[Rate]",
+        "dataType": "Double",
+        "isNullable": true,
+        "ordinal": 5
+      },
+      {
+        "name": "[MeanGap]",
+        "dataType": "Decimal",
+        "isNullable": true,
+        "ordinal": 6
+      },
+      {
+        "name": "[GapCount]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 7
+      }
+    ],
+    "rows": [
+      {
+        "[Failures]": 761,
+        "[Machines]": 98,
+        "[Errors]": 3919,
+        "[Replacements]": 3286,
+        "[Hours]": 876100,
+        "[Rate]": 0.868622303390024,
+        "[MeanGap]": 1107.2899,
+        "[GapCount]": 621
+      }
+    ],
+    "executionTimeMs": 10
+  },
+  {
+    "case": "2015",
+    "rowCount": 1,
+    "isTruncated": false,
+    "columns": [
+      {
+        "name": "[Failures]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 0
+      },
+      {
+        "name": "[Errors]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 1
+      },
+      {
+        "name": "[Hours]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 2
+      },
+      {
+        "name": "[Replacements]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 3
+      }
+    ],
+    "rows": [
+      {
+        "[Failures]": 761,
+        "[Errors]": 3917,
+        "[Hours]": 875400,
+        "[Replacements]": 2879
+      }
+    ],
+    "executionTimeMs": 19
+  },
+  {
+    "case": "priority",
+    "rowCount": 10,
+    "isTruncated": false,
+    "columns": [
+      {
+        "name": "Machines[Machine ID]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 0
+      },
+      {
+        "name": "Machines[Machine]",
+        "dataType": "String",
+        "isNullable": true,
+        "ordinal": 1
+      },
+      {
+        "name": "Machines[Model]",
+        "dataType": "String",
+        "isNullable": true,
+        "ordinal": 2
+      },
+      {
+        "name": "[Score]",
+        "dataType": "Decimal",
+        "isNullable": true,
+        "ordinal": 3
+      },
+      {
+        "name": "[Rank]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 4
+      },
+      {
+        "name": "[Reasons]",
+        "dataType": "String",
+        "isNullable": true,
+        "ordinal": 5
+      }
+    ],
+    "rows": [
+      {
+        "Machines[Machine ID]": 50,
+        "Machines[Machine]": "Machine 050",
+        "Machines[Model]": "model4",
+        "[Score]": 50.7,
+        "[Rank]": 8,
+        "[Reasons]": "0 failures /14d; 2 errors /7d; max |z| 4.0; oldest component 95d"
+      },
+      {
+        "Machines[Machine ID]": 71,
+        "Machines[Machine]": "Machine 071",
+        "Machines[Model]": "model2",
+        "[Score]": 51,
+        "[Rank]": 7,
+        "[Reasons]": "0 failures /14d; 2 errors /7d; max |z| 7.6; oldest component 99d"
+      },
+      {
+        "Machines[Machine ID]": 79,
+        "Machines[Machine]": "Machine 079",
+        "Machines[Model]": "model3",
+        "[Score]": 51,
+        "[Rank]": 7,
+        "[Reasons]": "0 failures /14d; 2 errors /7d; max |z| 7.5; oldest component 108d"
+      },
+      {
+        "Machines[Machine ID]": 44,
+        "Machines[Machine]": "Machine 044",
+        "Machines[Model]": "model4",
+        "[Score]": 51,
+        "[Rank]": 7,
+        "[Reasons]": "0 failures /14d; 2 errors /7d; max |z| 9.3; oldest component 110d"
+      },
+      {
+        "Machines[Machine ID]": 85,
+        "Machines[Machine]": "Machine 085",
+        "Machines[Model]": "model1",
+        "[Score]": 53,
+        "[Rank]": 6,
+        "[Reasons]": "1 failures /14d; 1 errors /7d; max |z| 6.8; oldest component 50d"
+      },
+      {
+        "Machines[Machine ID]": 83,
+        "Machines[Machine]": "Machine 083",
+        "Machines[Model]": "model4",
+        "[Score]": 57,
+        "[Rank]": 5,
+        "[Reasons]": "2 failures /14d; 3 errors /7d; max |z| 1.0; oldest component 64d"
+      },
+      {
+        "Machines[Machine ID]": 54,
+        "Machines[Machine]": "Machine 054",
+        "Machines[Model]": "model2",
+        "[Score]": 58.2,
+        "[Rank]": 4,
+        "[Reasons]": "1 failures /14d; 3 errors /7d; max |z| 2.9; oldest component 110d"
+      },
+      {
+        "Machines[Machine ID]": 21,
+        "Machines[Machine]": "Machine 021",
+        "Machines[Model]": "model2",
+        "[Score]": 61,
+        "[Rank]": 3,
+        "[Reasons]": "1 failures /14d; 1 errors /7d; max |z| 7.6; oldest component 72d"
+      },
+      {
+        "Machines[Machine ID]": 88,
+        "Machines[Machine]": "Machine 088",
+        "Machines[Model]": "model4",
+        "[Score]": 71,
+        "[Rank]": 1,
+        "[Reasons]": "1 failures /14d; 2 errors /7d; max |z| 8.3; oldest component 91d"
+      },
+      {
+        "Machines[Machine ID]": 15,
+        "Machines[Machine]": "Machine 015",
+        "Machines[Model]": "model3",
+        "[Score]": 68,
+        "[Rank]": 2,
+        "[Reasons]": "1 failures /14d; 1 errors /7d; max |z| 8.0; oldest component 120d"
+      }
+    ],
+    "executionTimeMs": 30
+  },
+  {
+    "case": "metadata",
+    "rowCount": 1,
+    "isTruncated": false,
+    "columns": [
+      {
+        "name": "[Tables]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 0
+      },
+      {
+        "name": "[Relationships]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 1
+      },
+      {
+        "name": "[Measures]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 2
+      }
+    ],
+    "rows": [
+      {
+        "[Tables]": 11,
+        "[Relationships]": 19,
+        "[Measures]": 41
+      }
+    ],
+    "executionTimeMs": 14
+  },
+  {
+    "case": "filter1",
+    "rowCount": 1,
+    "isTruncated": false,
+    "columns": [
+      {
+        "name": "[Failures]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 0
+      },
+      {
+        "name": "[Errors]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 1
+      },
+      {
+        "name": "[Hours]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 2
+      }
+    ],
+    "rows": [
+      {
+        "[Failures]": 1,
+        "[Errors]": 7,
+        "[Hours]": 738
+      }
+    ],
+    "executionTimeMs": 10
+  },
+  {
+    "case": "filter42",
+    "rowCount": 1,
+    "isTruncated": false,
+    "columns": [
+      {
+        "name": "[Failures]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 0
+      },
+      {
+        "name": "[Errors]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 1
+      },
+      {
+        "name": "[Hours]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 2
+      }
+    ],
+    "rows": [
+      {
+        "[Failures]": 4,
+        "[Errors]": 12,
+        "[Hours]": 2184
+      }
+    ],
+    "executionTimeMs": 8
+  },
+  {
+    "case": "filternull",
+    "rowCount": 1,
+    "isTruncated": false,
+    "columns": [
+      {
+        "name": "[Failures]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 0
+      },
+      {
+        "name": "[Errors]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 1
+      },
+      {
+        "name": "[Hours]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 2
+      }
+    ],
+    "rows": [
+      {
+        "[Failures]": 64,
+        "[Errors]": 299,
+        "[Hours]": 74400
+      }
+    ],
+    "executionTimeMs": 9
+  },
+  {
+    "case": "all_41_measures",
+    "rowCount": 1,
+    "isTruncated": false,
+    "columns": [
+      {
+        "name": "[Failure Events]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 0
+      },
+      {
+        "name": "[Machines With Failures]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 1
+      },
+      {
+        "name": "[Error Events]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 2
+      },
+      {
+        "name": "[Replacement Records]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 3
+      },
+      {
+        "name": "[Observed Telemetry Hours]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 4
+      },
+      {
+        "name": "[Observed Machines]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 5
+      },
+      {
+        "name": "[Failures per 1000 Observed Hours]",
+        "dataType": "Double",
+        "isNullable": true,
+        "ordinal": 6
+      },
+      {
+        "name": "[Component Cumulative Share]",
+        "dataType": "Double",
+        "isNullable": true,
+        "ordinal": 7
+      },
+      {
+        "name": "[Plant Insight]",
+        "dataType": "String",
+        "isNullable": true,
+        "ordinal": 8
+      },
+      {
+        "name": "[Mean Completed Failure Gap Hours]",
+        "dataType": "Decimal",
+        "isNullable": true,
+        "ordinal": 9
+      },
+      {
+        "name": "[Completed Gap Sample]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 10
+      },
+      {
+        "name": "[Sensor Daily Mean]",
+        "dataType": "Decimal",
+        "isNullable": true,
+        "ordinal": 11
+      },
+      {
+        "name": "[Prior 30 Day Mean]",
+        "dataType": "Decimal",
+        "isNullable": true,
+        "ordinal": 12
+      },
+      {
+        "name": "[Sensor Deviation Z]",
+        "dataType": "Decimal",
+        "isNullable": true,
+        "ordinal": 13
+      },
+      {
+        "name": "[Failure Window Mean]",
+        "dataType": "Decimal",
+        "isNullable": true,
+        "ordinal": 14
+      },
+      {
+        "name": "[Window Event Sample]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 15
+      },
+      {
+        "name": "[Window Hour Sample]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 16
+      },
+      {
+        "name": "[As Of Date]",
+        "dataType": "DateTime",
+        "isNullable": true,
+        "ordinal": 17
+      },
+      {
+        "name": "[Priority Score]",
+        "dataType": "Decimal",
+        "isNullable": true,
+        "ordinal": 18
+      },
+      {
+        "name": "[Recent Failures 14 Days]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 19
+      },
+      {
+        "name": "[Recent Errors 7 Days]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 20
+      },
+      {
+        "name": "[Maximum Sensor Deviation]",
+        "dataType": "Decimal",
+        "isNullable": true,
+        "ordinal": 21
+      },
+      {
+        "name": "[Oldest Component Replacement Days]",
+        "dataType": "Decimal",
+        "isNullable": true,
+        "ordinal": 22
+      },
+      {
+        "name": "[Failure Score Points]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 23
+      },
+      {
+        "name": "[Error Score Points]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 24
+      },
+      {
+        "name": "[Sensor Score Points]",
+        "dataType": "Decimal",
+        "isNullable": true,
+        "ordinal": 25
+      },
+      {
+        "name": "[Maintenance Score Points]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 26
+      },
+      {
+        "name": "[Baseline Sensor Count]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 27
+      },
+      {
+        "name": "[Component History Count]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 28
+      },
+      {
+        "name": "[Priority Reasons]",
+        "dataType": "String",
+        "isNullable": true,
+        "ordinal": 29
+      },
+      {
+        "name": "[Suggested Inspection]",
+        "dataType": "String",
+        "isNullable": true,
+        "ordinal": 30
+      },
+      {
+        "name": "[Priority Status]",
+        "dataType": "String",
+        "isNullable": true,
+        "ordinal": 31
+      },
+      {
+        "name": "[Priority Rank]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 32
+      },
+      {
+        "name": "[High Priority Machines]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 33
+      },
+      {
+        "name": "[Watch Priority Machines]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 34
+      },
+      {
+        "name": "[Latest Observed Timestamp]",
+        "dataType": "DateTime",
+        "isNullable": true,
+        "ordinal": 35
+      },
+      {
+        "name": "[Machine Context]",
+        "dataType": "String",
+        "isNullable": true,
+        "ordinal": 36
+      },
+      {
+        "name": "[Machine History Note]",
+        "dataType": "String",
+        "isNullable": true,
+        "ordinal": 37
+      },
+      {
+        "name": "[Top Machine Failure Events]",
+        "dataType": "Int64",
+        "isNullable": true,
+        "ordinal": 38
+      },
+      {
+        "name": "[Priority Date Label]",
+        "dataType": "String",
+        "isNullable": true,
+        "ordinal": 39
+      },
+      {
+        "name": "[Sensor Context]",
+        "dataType": "String",
+        "isNullable": true,
+        "ordinal": 40
+      }
+    ],
+    "rows": [
+      {
+        "[Failure Events]": 0,
+        "[Machines With Failures]": 0,
+        "[Error Events]": 0,
+        "[Replacement Records]": 0,
+        "[Observed Telemetry Hours]": 24,
+        "[Observed Machines]": 1,
+        "[Failures per 1000 Observed Hours]": 0,
+        "[Component Cumulative Share]": null,
+        "[Plant Insight]": "0 component failure events; 0 machines with records. No failures in selected scope.",
+        "[Mean Completed Failure Gap Hours]": null,
+        "[Completed Gap Sample]": null,
+        "[Sensor Daily Mean]": 175.399,
+        "[Prior 30 Day Mean]": 172.7524,
+        "[Sensor Deviation Z]": 0.3658,
+        "[Failure Window Mean]": null,
+        "[Window Event Sample]": null,
+        "[Window Hour Sample]": null,
+        "[As Of Date]": "2015-12-31T00:00:00",
+        "[Priority Score]": 71,
+        "[Recent Failures 14 Days]": 1,
+        "[Recent Errors 7 Days]": 2,
+        "[Maximum Sensor Deviation]": 8.2513,
+        "[Oldest Component Replacement Days]": 91,
+        "[Failure Score Points]": 20,
+        "[Error Score Points]": 6,
+        "[Sensor Score Points]": 30,
+        "[Maintenance Score Points]": 15,
+        "[Baseline Sensor Count]": 4,
+        "[Component History Count]": 4,
+        "[Priority Reasons]": "1 failures /14d; 2 errors /7d; max |z| 8.3; oldest component 91d",
+        "[Suggested Inspection]": "Review replaced components and recurring failure modes",
+        "[Priority Status]": "High - inspect",
+        "[Priority Rank]": 1,
+        "[High Priority Machines]": 1,
+        "[Watch Priority Machines]": 0,
+        "[Latest Observed Timestamp]": "2015-12-31T23:00:00",
+        "[Machine Context]": "Machine 088 | model4 | recorded age 14 years",
+        "[Machine History Note]": "No recorded failure in this period. No replacement record in this period; earlier history may exist.",
+        "[Top Machine Failure Events]": 0,
+        "[Priority Date Label]": "As of 31 Dec 2015 | rule-based score, not ML probability",
+        "[Sensor Context]": "Voltage | source sample units (physical units unspecified)"
+      }
+    ],
+    "executionTimeMs": 136
+  }
+]

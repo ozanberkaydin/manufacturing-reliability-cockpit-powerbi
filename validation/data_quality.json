@@ -1,0 +1,198 @@
+{
+  "status": "passed",
+  "sources": {
+    "machines": {
+      "rows": 100,
+      "missing": {
+        "machineID": 0,
+        "model": 0,
+        "age": 0
+      },
+      "exact_duplicates": 0,
+      "sha256": "5e8e1571c4999bf88abb7cae3925964c218d946fe851a9a100bb3d19330652bc",
+      "source": "https://raw.githubusercontent.com/microsoft/sqlworkshops/master/SQLServerAndAzureMachineLearning/ML%20Services%20for%20SQL%20Server/data/PdM_machines.csv"
+    },
+    "telemetry": {
+      "rows": 876100,
+      "missing": {
+        "datetime": 0,
+        "machineID": 0,
+        "volt": 0,
+        "rotate": 0,
+        "pressure": 0,
+        "vibration": 0
+      },
+      "exact_duplicates": 0,
+      "sha256": "d957f3c45bb83416b716600da8cffd72f4b6961db89867d9696ad19f7cb1bd4e",
+      "source": "https://raw.githubusercontent.com/microsoft/sqlworkshops/master/SQLServerAndAzureMachineLearning/ML%20Services%20for%20SQL%20Server/data/PdM_telemetry.csv",
+      "min_timestamp": "2015-01-01 06:00:00",
+      "max_timestamp": "2016-01-01 06:00:00",
+      "simultaneous_extra_records": 0,
+      "non_hourly_gaps": 0
+    },
+    "errors": {
+      "rows": 3919,
+      "missing": {
+        "datetime": 0,
+        "machineID": 0,
+        "errorID": 0
+      },
+      "exact_duplicates": 0,
+      "sha256": "9c2a2a010ad77227e2bb0c94e7971bca78810790ddd1f28a8bee4f12c2f62370",
+      "source": "https://raw.githubusercontent.com/microsoft/sqlworkshops/master/SQLServerAndAzureMachineLearning/ML%20Services%20for%20SQL%20Server/data/PdM_errors.csv",
+      "min_timestamp": "2015-01-01 06:00:00",
+      "max_timestamp": "2016-01-01 05:00:00",
+      "simultaneous_extra_records": 303
+    },
+    "maint": {
+      "rows": 3286,
+      "missing": {
+        "datetime": 0,
+        "machineID": 0,
+        "comp": 0
+      },
+      "exact_duplicates": 0,
+      "sha256": "481ed4e155f609e6ca6130754d2c035453093902a507cce5b3f3e235995f1db6",
+      "source": "https://raw.githubusercontent.com/microsoft/sqlworkshops/master/SQLServerAndAzureMachineLearning/ML%20Services%20for%20SQL%20Server/data/PdM_maint.csv",
+      "min_timestamp": "2014-06-01 06:00:00",
+      "max_timestamp": "2016-01-01 06:00:00",
+      "simultaneous_extra_records": 758
+    },
+    "failures": {
+      "rows": 761,
+      "missing": {
+        "datetime": 0,
+        "machineID": 0,
+        "failure": 0
+      },
+      "exact_duplicates": 0,
+      "sha256": "0c6c31a4fd52ef2df95ad7c44e8b0c8c32917bcef29ba5a1ba3ba45531ded3b7",
+      "source": "https://raw.githubusercontent.com/microsoft/sqlworkshops/master/SQLServerAndAzureMachineLearning/ML%20Services%20for%20SQL%20Server/data/PdM_failures.csv",
+      "min_timestamp": "2015-01-02 03:00:00",
+      "max_timestamp": "2015-12-31 06:00:00",
+      "simultaneous_extra_records": 42,
+      "failure_without_matching_replacement": 18
+    }
+  },
+  "checks": [
+    "Exact schemas",
+    "No required nulls",
+    "No unresolved duplicates",
+    "Valid integer keys",
+    "No orphan machines",
+    "Hour-aligned timestamps",
+    "Contiguous hourly telemetry",
+    "Simultaneous records preserved",
+    "Failure/replacement matching audited",
+    "Score range 0-100",
+    "Future-data prefix invariance"
+  ],
+  "summary": {
+    "machines": 100,
+    "telemetry_hours": 876100,
+    "failure_events": 761,
+    "machines_with_failure": 98,
+    "error_events": 3919,
+    "replacement_records": 3286,
+    "daily_rows": 36600,
+    "sensor_daily_rows": 146400,
+    "failure_events_per_1000_observed_hours": 0.8686223033900239,
+    "mean_completed_gap_hours": 1107.2898550724638,
+    "completed_gap_count": 621,
+    "priority_score_min": 0.0,
+    "priority_score_max": 95.8,
+    "prefix_invariance": "passed at 2015-06-30",
+    "telemetry_start": "2015-01-01 06:00:00",
+    "telemetry_end": "2016-01-01 06:00:00",
+    "filter_expectations": [
+      {
+        "machine": 1,
+        "start": "2015-01-01",
+        "end": "2015-01-31",
+        "failures": 1,
+        "errors": 7,
+        "hours": 738
+      },
+      {
+        "machine": 42,
+        "start": "2015-04-01",
+        "end": "2015-06-30",
+        "failures": 4,
+        "errors": 12,
+        "hours": 2184
+      },
+      {
+        "machine": null,
+        "start": "2015-07-01",
+        "end": "2015-07-31",
+        "failures": 64,
+        "errors": 299,
+        "hours": 74400
+      }
+    ],
+    "failures_by_component": {
+      "comp1": 192,
+      "comp2": 259,
+      "comp3": 131,
+      "comp4": 179
+    },
+    "failures_by_model": {
+      "model1": 189,
+      "model2": 168,
+      "model3": 221,
+      "model4": 183
+    },
+    "priority_top_10_at_2015_12_31": [
+      {
+        "Machine ID": 88,
+        "Priority Score": 71.0,
+        "Priority Reasons": "1 failures /14d; 2 errors /7d; max |z| 8.3; oldest component 91d"
+      },
+      {
+        "Machine ID": 15,
+        "Priority Score": 68.0,
+        "Priority Reasons": "1 failures /14d; 1 errors /7d; max |z| 8.0; oldest component 120d"
+      },
+      {
+        "Machine ID": 21,
+        "Priority Score": 61.0,
+        "Priority Reasons": "1 failures /14d; 1 errors /7d; max |z| 7.6; oldest component 72d"
+      },
+      {
+        "Machine ID": 54,
+        "Priority Score": 58.2,
+        "Priority Reasons": "1 failures /14d; 3 errors /7d; max |z| 2.9; oldest component 110d"
+      },
+      {
+        "Machine ID": 83,
+        "Priority Score": 57.0,
+        "Priority Reasons": "2 failures /14d; 3 errors /7d; max |z| 1.0; oldest component 64d"
+      },
+      {
+        "Machine ID": 85,
+        "Priority Score": 53.0,
+        "Priority Reasons": "1 failures /14d; 1 errors /7d; max |z| 6.8; oldest component 50d"
+      },
+      {
+        "Machine ID": 44,
+        "Priority Score": 51.0,
+        "Priority Reasons": "0 failures /14d; 2 errors /7d; max |z| 9.3; oldest component 110d"
+      },
+      {
+        "Machine ID": 71,
+        "Priority Score": 51.0,
+        "Priority Reasons": "0 failures /14d; 2 errors /7d; max |z| 7.6; oldest component 99d"
+      },
+      {
+        "Machine ID": 79,
+        "Priority Score": 51.0,
+        "Priority Reasons": "0 failures /14d; 2 errors /7d; max |z| 7.5; oldest component 108d"
+      },
+      {
+        "Machine ID": 50,
+        "Priority Score": 50.7,
+        "Priority Reasons": "0 failures /14d; 2 errors /7d; max |z| 4.0; oldest component 95d"
+      }
+    ]
+  }
+}
