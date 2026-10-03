@@ -2,6 +2,10 @@
 
 A historical reliability and maintenance analysis for a manufacturing maintenance manager. Python prepares auditable data and time-safe rule-based priorities. Power BI provides four connected pages: Plant Overview, Machine Health, Failure Analysis, and Maintenance Priorities. No machine learning is used.
 
+> **Scope:** This is historical reliability analytics on a simulated Microsoft sample. The priority score is a transparent rule-based ranking for engineering review, not a failure prediction, not ML, not a live monitoring system, and not production-deployed.
+
+Companion project on the same dataset: [azure-predictive-maintenance-sql](https://github.com/ozanberkaydin/azure-predictive-maintenance-sql) (PostgreSQL analysis). Shared headline figures (761 component failure records, comp2 = 34.0%, 1,107.29 h mean completed failure gap over 621 gaps) agree across both projects.
+
 ## Report pages
 
 | Plant Overview | Machine Health |
@@ -116,3 +120,28 @@ See `validation/data_quality.json`, `python_expected.json`, `report_layout.json`
 Live DAX totals, selected date/machine comparisons, visual rendering, and interactive verification must be assessed separately from on-disk checks. Screenshots, when successfully captured, are retained in `screenshots/` as requested delivery artifacts and can contain visible report data.
 
 Source dates have partial first/last telemetry days. There is no production, repair duration, downtime, causal component mapping, savings, or cost data. No OEE, downtime costs, production losses, or maintenance savings are invented. Priority thresholds require local calibration before operational use. Model codes and static ages are descriptive strata; model/age differences do not prove causes. Raw data and the large cleaned hourly telemetry CSV are excluded from Git; they can be regenerated. Power BI cache files are excluded. Processed model inputs, source code, PBIP definitions, QA summaries, and retained screenshots form the delivery.
+
+## Repository structure
+
+```text
+manufacturing-reliability-cockpit-powerbi/
+├── Manufacturing_Reliability_Cockpit.pbip            # Open in Power BI Desktop
+├── Manufacturing_Reliability_Cockpit.Report/         # PBIR report definition (4 pages)
+├── Manufacturing_Reliability_Cockpit.SemanticModel/  # TMDL semantic model (11 tables)
+├── src/                  # Python pipeline, model spec and report builders
+├── data/processed/       # Model-ready CSVs (raw data and hourly telemetry are git-ignored)
+├── validation/           # Data-quality, expected-value and layout checks
+├── screenshots/          # Report page captures
+├── docs/MICROSOFT_SAMPLE_LICENSE.txt
+├── requirements.txt
+├── LICENSE
+└── README.md
+```
+
+## License
+
+The [MIT License](LICENSE) applies to this repository's code, model definitions and documentation. The source data is Microsoft sample data under Microsoft's MIT license, retained in `docs/MICROSOFT_SAMPLE_LICENSE.txt`.
+
+## Author
+
+Ozan Berk Aydin
