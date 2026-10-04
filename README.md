@@ -1,20 +1,72 @@
 # Manufacturing Reliability & Maintenance Cockpit
 
-A historical reliability and maintenance analysis for a manufacturing maintenance manager. Python prepares auditable data and time-safe rule-based priorities. Power BI provides four connected pages: Plant Overview, Machine Health, Failure Analysis, and Maintenance Priorities. No machine learning is used.
+**A Python and Power BI portfolio project for maintenance decision support.**
 
-> **Scope:** This is historical reliability analytics on a simulated Microsoft sample. The priority score is a transparent rule-based ranking for engineering review, not a failure prediction, not ML, not a live monitoring system, and not production-deployed.
+## Business problem
 
-Companion project on the same dataset: [azure-predictive-maintenance-sql](https://github.com/ozanberkaydin/azure-predictive-maintenance-sql) (PostgreSQL analysis). Shared headline figures (761 component failure records, comp2 = 34.0%, 1,107.29 h mean completed failure gap over 621 gaps) agree across both projects.
+A maintenance manager needs to understand where failures are concentrated and which machines deserve inspection first. This project connects fleet reliability, machine sensor history, component failures, and an explainable maintenance priority queue in four Power BI pages.
 
-## Report pages
+Python validates and prepares the data; Power BI lets the user move from the plant overview to a selected machine and inspect the evidence behind its priority.
 
-| Plant Overview | Machine Health |
-|---|---|
-| ![Plant Overview](screenshots/Plant%20Overview.png) | ![Machine Health](screenshots/Machine%20Health.png) |
-| **Failure Analysis** | **Maintenance Priorities** |
-| ![Failure Analysis](screenshots/Failure%20Analysis.png) | ![Maintenance Priorities](screenshots/Maintenance%20Priorities.png) |
+## Key findings
 
-Tech stack: Python (pandas, numpy) · Power BI Desktop (PBIP / PBIR, TMDL) · DAX · Power Query
+- **Failure concentration:** `comp2` accounts for 259 of 761 component failure records (**34.0%**), making it a starting point for further engineering investigation.
+- **Fleet coverage:** **98 of 100 machines** have at least one recorded component failure during the observed period.
+- **Inspection priorities:** At the end of **31 December 2015**, Machine 088 leads the rule-based queue at **71/100**, followed by Machine 015 at 68 and Machine 021 at 61. Machine 088's score combines a recent failure, two recent errors, sensor deviation, and component replacement history.
+
+> **Data and scope:** Historical analysis of a simulated Microsoft sample. The priority score is a transparent rule-based ranking for engineering review. It is not a calibrated failure probability; no machine learning is used.
+
+## Dashboard preview
+
+![Plant Overview — fleet reliability, failure trends and component concentration](screenshots/Plant%20Overview.png)
+
+### From overview to inspection
+
+1. **Plant Overview:** Review failure trends and component concentration; filter by date, model, and machine.
+2. **Failure Analysis:** Compare failures per 1,000 observed telemetry hours and examine sensor behavior around failure records.
+3. **Maintenance Priorities:** Rank machines and inspect the contribution of failures, errors, sensor deviation, and replacement history.
+4. **Machine Health:** Drill through to a machine and compare its daily sensor readings with its preceding 30-day reference.
+
+![Maintenance Priorities — ranked machines and explainable score contributions](screenshots/Maintenance%20Priorities.png)
+
+### Machine-level example: Machine 088
+
+The drill-through view connects the priority queue to a machine's sensor and event history. This gives a maintenance reviewer context for an inspection decision.
+
+![Machine 088 — sensor history and maintenance events](screenshots/Machine%20088%20Drillthrough.png)
+
+<details>
+<summary>Additional report previews</summary>
+
+### Machine Health — fleet view before selecting a machine
+
+![Machine Health](screenshots/Machine%20Health.png)
+
+### Failure Analysis
+
+![Failure Analysis](screenshots/Failure%20Analysis.png)
+
+</details>
+
+## What this project demonstrates
+
+- Python data preparation, schema and quality checks, and historical feature engineering.
+- Power BI modeling with 11 tables, DAX measures, filters, and machine drill-through.
+- Exposure-normalized reliability comparisons and explainable inspection priorities.
+- Python–DAX reconciliation, including selected date/machine checks and priority score comparisons.
+
+**Tech stack:** Python (pandas, numpy) · Power BI Desktop (PBIP / PBIR, TMDL) · DAX · Power Query
+
+**Companion SQL project:** [azure-predictive-maintenance-sql](https://github.com/ozanberkaydin/azure-predictive-maintenance-sql) analyzes the same dataset in PostgreSQL. Shared headline results agree across the two projects.
+
+## Open the report
+
+1. Download or clone this repository.
+2. Generate the missing source and hourly telemetry files with `python src/pipeline.py` after installing `requirements.txt`.
+3. Open `Manufacturing_Reliability_Cockpit.pbip` in a recent Power BI Desktop with PBIP/PBIR support.
+4. Set **Transform data > Manage Parameters > Data Folder** to your local `data/processed` folder, then refresh.
+
+The full rebuild instructions and KPI definitions are below. The screenshots provide a preview without installing Power BI.
 
 ## Data source and terms
 
@@ -52,7 +104,7 @@ The 11-table star model uses Machines and a contiguous marked Dates dimension. C
 - **Observed Telemetry Hours:** number of hourly samples in the same selected dates/machines. It measures observed telemetry exposure, not productive uptime.
 - **Failures per 1000 Observed Hours:** `1000 × selected component failure events / selected hourly samples`. Selected period is the date slicer range. Model/age comparisons use each group's observed exposure. A component filter affects the numerator; the denominator remains selected machine exposure. This is an event frequency, not a probability or component survival rate.
 - **Replacement Records:** component replacements, including failure-related replacements. Do not add replacements and failures together as unique incidents.
-- **Component Cumulative Share:** cumulative failure counts in descending component order / failure events in selected component scope. Shown as a Pareto combo chart: bars = failure events, line = cumulative share on the secondary axis.
+- **Component Cumulative Share:** cumulative failure counts in descending component order / failure events in selected component scope. The Plant Overview preview shows a descending component table with failure counts and cumulative share, alongside a component-count bar chart.
 - **Mean Completed Failure Gap Hours:** mean elapsed gap between distinct consecutive machine failure timestamps where both endpoints lie inside the selected continuous period. Simultaneous component failures collapse only for this metric. First/last censored intervals are excluded; only machines with repeat events contribute. This is deliberately **not labeled MTBF**, because true operating exposure, repair completion, censoring adjustments, and machine state are unavailable. Full-source mean is 1,107.29 hours over 621 completed gaps. The measure exists for exploration; no misleading MTBF headline is shown.
 - **Failure Window Mean:** equally weighted full 24-hour bins around individual component failure records, offsets -3 through +2; day 0 begins at the failure timestamp. Partial bins are excluded from the visual's mean and sample count. Tooltips show event and hour samples. Overlapping windows reuse observations, so they are not independent; post-event values can reflect replacement. Associations are not causal evidence.
 
@@ -72,13 +124,6 @@ Sum gives 0–100. **High – inspect:** >=60. **Watch – review:** 30–<60. *
 For each sensor and machine, z compares the current daily mean with the mean and sample standard deviation of the **preceding 30 observed daily means** (minimum 7), explicitly shifting by one day. Contiguous hourly coverage is verified before using these daily windows. Reference variance near zero or insufficient history yields no z score and zero sensor points; baseline coverage is exposed as a measure. Missing component history stays unknown, contributes no overdue points, and is not treated as proof of a recent replacement. Component history count is exposed. A new component replacement resets only that component's age; the oldest of the four known ages drives recency.
 
 The queue includes recent counts, maximum deviation, oldest replacement age, status text, dense rank within selected machines/model, and each point contribution. Reasons and suggested inspections are available per machine. Suggestions are analytical recommendations for review by qualified maintenance staff. A prefix recomputation at 2015-06-30 verifies that later telemetry, failures, errors, and replacements do not change scores through that date.
-
-## Findings from the sample
-
-- 761 component failure records affect 98 of 100 machines; two machines have no failure record in the observed period.
-- `comp2` contributes 259 records (34.0%), followed by `comp1` 192, `comp4` 179, and `comp3` 131. This concentrates inspection attention, but does not identify physical component causes.
-- Full-source event frequency is 0.8686 component failures per 1,000 observed telemetry hours. Group comparisons must use exposure rather than raw counts alone.
-- On 2015-12-31, Machine 088 leads the priority queue at 71.0: one failure over 14 days, two errors over 7 days, maximum absolute z about 8.3, and an oldest component replacement age of 91 days. Machine 015 scores 68.0; Machine 021 scores 61.0. These are review priorities, not predictions.
 
 ## Reproduce and open
 
@@ -145,3 +190,4 @@ The [MIT License](LICENSE) applies to this repository's code, model definitions 
 ## Author
 
 Ozan Berk Aydin
+
